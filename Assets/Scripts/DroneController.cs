@@ -1,153 +1,219 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+using Unity.MLAgents;
+using Unity.MLAgents.Actuators;
+using Unity.MLAgents.Sensors;
 
-[RequireComponent(typeof(Rigidbody))]
-public class DroneController : MonoBehaviour
-{
-    public float thrustChangeRate = 10.0f;
-    public float maximumThrustOffset = 20.0f;
-    public float thrustReturnRate = 10.0f;
-    public float tiltChangeRate = 30.0f;
-    public float tiltStabilizationTorque = 20.0f;
-    public float angularDamping = 5.0f;
-    public float maximumTiltAngle = 40.0f;
-    public float minimumCosine = 0.1f;
+public class DroneMove : Agent
+{       
+    public float stabilizingSpeed = 3f; 
+    private float baseThrustOffset = 0f;   
+    private float defaultBaseThrust;        
+    public float movementForce = 20f;         
+    public float tiltAngle = 30f;           
+    public float tiltSpeed = 5f;                      
+    public float verticalDamping = 5f;
+    public float horizontalDamping = 1f;
+
+    public Transform[] propellers;            
+    public float propellerSpeed = 1000f;      
+    [SerializeField] private bool requestDecisionsInCode = true;
+    [SerializeField] private float finishLineReward = 1f;
 
     private Rigidbody rb;
-    private float thrustOffset;
-    private float targetPitch;
-    private float targetRoll;
+    private Quaternion targetRotation;
+    private Vector3 startingPosition;
+    private Quaternion startingRotation;
+    private float verticalInput;
+    private Vector2 movementInput;
+    private bool reachedFinishLine;
 
-    private void Awake()
+        private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        rb.constraints |= RigidbodyConstraints.FreezeRotationY;
+        startingPosition = transform.position;
+        startingRotation = transform.rotation;
+        targetRotation = startingRotation;
+    }
+
+        public override void OnEpisodeBegin()
+        {
+            Reset();
+        }
+
+        public void Reset()
+    {
+        transform.SetPositionAndRotation(startingPosition, startingRotation);
+
+        Rigidbody body = GetComponent<Rigidbody>();
+        if (body != null)
+        {
+            body.linearVelocity = Vector3.zero;
+            body.angularVelocity = Vector3.zero;
+        }
+
+        verticalInput = 0f;
+        movementInput = Vector2.zero;
+        reachedFinishLine = false;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("building"))
+        {
+            AddReward(-1); // Penalty for hitting a wall
+            EndEpisode(); // End the episode after hitting a wall
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (reachedFinishLine || !other.CompareTag("finishline"))
+            return;
+
+        reachedFinishLine = true;
+        AddReward(finishLineReward);
+        EndEpisode();
+    }
+
+    void Start()
+    {
+
+    }
+
+    public override void Heuristic(in ActionBuffers actionsOut)
+    {
+        var discreteActionsOut = actionsOut.DiscreteActions;
+        discreteActionsOut[0] = 0;
+        discreteActionsOut[1] = 0;
+        discreteActionsOut[2] = 0;
+
+
+        if (Keyboard.current == null)
+            return;
+
+        if (Keyboard.current.wKey.isPressed)
+            discreteActionsOut[0] = 1;
+        else if (Keyboard.current.sKey.isPressed)
+            discreteActionsOut[0] = 2;
+
+        if (Keyboard.current.aKey.isPressed)
+            discreteActionsOut[1] = 1;
+        else if (Keyboard.current.dKey.isPressed)
+            discreteActionsOut[1] = 2;
+
+        if (Keyboard.current.eKey.isPressed)
+            discreteActionsOut[2] = 1;
+        else if (Keyboard.current.qKey.isPressed)
+            discreteActionsOut[2] = 2;
+    }
+
+    public override void OnActionReceived(ActionBuffers actions)
+    {
+        
+        var discreteActions = actions.DiscreteActions;
+        movementInput = Vector2.zero;
+
+        if (discreteActions[0] == 1)
+            movementInput.y = 1f;
+        else if (discreteActions[0] == 2)
+            movementInput.y = -1f;
+
+        if (discreteActions[1] == 1)
+            movementInput.x = -1f;
+        else if (discreteActions[1] == 2)
+            movementInput.x = 1f;
+
+        verticalInput = 0f;
+        if (discreteActions[2] == 1)
+            verticalInput = movementForce;
+        else if (discreteActions[2] == 2)
+            verticalInput = -movementForce;
+
+            
     }
 
     private void FixedUpdate()
     {
-        UpdateThrustOffset();
-        UpdateTargetTilt();
-        ApplyThrust();
-        ApplyTiltTorque();
-        LimitTiltAngle();
+        if (requestDecisionsInCode)
+            RequestDecision();
+
+        Hover(verticalInput);
+        TiltDrone(movementInput);
+        MoveDrone(movementInput);
+        StabilizeHorizontalDrift();
+        AutoLevel(movementInput);
     }
 
-    private void UpdateThrustOffset()
+    void Update()
     {
-        if (Input.GetKey(KeyCode.R))
-        {
-            thrustOffset += thrustChangeRate * Time.fixedDeltaTime;
-        }
-        else if (Input.GetKey(KeyCode.F))
-        {
-            thrustOffset -= thrustChangeRate * Time.fixedDeltaTime;
-        }
-        else
-        {
-            thrustOffset = Mathf.MoveTowards(
-                thrustOffset,
-                0.0f,
-                thrustReturnRate * Time.fixedDeltaTime);
-        }
-
-        thrustOffset = Mathf.Clamp(
-            thrustOffset,
-            -maximumThrustOffset,
-            maximumThrustOffset);
+        AnimatePropellers();
     }
 
-    private void ApplyThrust()
+    void Hover(float vertical)
     {
-        float cosine = Vector3.Dot(transform.up.normalized, Vector3.up);
-        cosine = Mathf.Max(cosine, minimumCosine);
+        float gravity = Physics.gravity.magnitude;
+        float angle = Vector3.Angle(transform.up, Vector3.up);
 
-        float hoverThrust = (rb.mass * Physics.gravity.magnitude) / cosine;
-        float thrustForce = hoverThrust + thrustOffset;
+        float baseHoverForce = (rb.mass * gravity) / Mathf.Cos(angle * Mathf.Deg2Rad);
+        float totalHoverForce = baseHoverForce + baseThrustOffset;
 
-        rb.AddForce(transform.up * thrustForce, ForceMode.Force);
+        rb.AddForce(transform.up * (totalHoverForce + vertical), ForceMode.Force);
+
+        if (vertical == 0f)
+        {
+            float dampedVerticalVelocity = Mathf.MoveTowards(rb.linearVelocity.y, 0f, verticalDamping * Time.fixedDeltaTime);
+
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, dampedVerticalVelocity, rb.linearVelocity.z);
+        }
     }
 
-    private void ApplyTiltTorque()
+    void TiltDrone(Vector2 move)
     {
-        Vector3 localAngularVelocity = transform.InverseTransformDirection(rb.angularVelocity);
-        Vector3 localAngles = GetLocalTiltAngles();
+        float tiltX = move.y * tiltAngle;
+        float tiltZ = -move.x * tiltAngle;
 
-        Vector3 localTorque = new Vector3(
-            (targetPitch - localAngles.x) * tiltStabilizationTorque -
-            localAngularVelocity.x * angularDamping,
-            0.0f,
-            (targetRoll - localAngles.z) * tiltStabilizationTorque -
-            localAngularVelocity.z * angularDamping);
+        Quaternion desiredTilt = Quaternion.Euler(tiltX, targetRotation.eulerAngles.y, tiltZ);
+        targetRotation = Quaternion.Slerp(targetRotation, desiredTilt, Time.fixedDeltaTime * tiltSpeed);
 
-        rb.AddRelativeTorque(localTorque, ForceMode.Force);
+        rb.MoveRotation(targetRotation);
     }
 
-    private void UpdateTargetTilt()
+    void MoveDrone(Vector2 move)
     {
-        if (Input.GetKey(KeyCode.W))
-        {
-            targetPitch += tiltChangeRate * Time.fixedDeltaTime;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            targetPitch -= tiltChangeRate * Time.fixedDeltaTime;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            targetRoll -= tiltChangeRate * Time.fixedDeltaTime;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            targetRoll += tiltChangeRate * Time.fixedDeltaTime;
-        }
+        Vector3 forward = Vector3.ProjectOnPlane(transform.forward, Vector3.up).normalized;
+        Vector3 right = Vector3.ProjectOnPlane(transform.right, Vector3.up).normalized;
+        Vector3 force =
+            forward * move.y * movementForce +
+            right * move.x * movementForce;
 
-        targetPitch = Mathf.Clamp(targetPitch, -maximumTiltAngle, maximumTiltAngle);
-        targetRoll = Mathf.Clamp(targetRoll, -maximumTiltAngle, maximumTiltAngle);
+        rb.AddForce(force, ForceMode.Force);
     }
 
-    private Vector3 GetLocalTiltAngles()
+    void StabilizeHorizontalDrift()
     {
-        Quaternion localRotation = transform.parent == null
-            ? rb.rotation
-            : Quaternion.Inverse(transform.parent.rotation) * rb.rotation;
-
-        Vector3 localAngles = localRotation.eulerAngles;
-        localAngles.x = NormalizeAngle(localAngles.x);
-        localAngles.z = NormalizeAngle(localAngles.z);
-        return localAngles;
+        Vector3 horizontalVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+        rb.AddForce(-horizontalVelocity * horizontalDamping, ForceMode.Force);
     }
 
-    private void LimitTiltAngle()
+    void AutoLevel(Vector2 move)
     {
-        Quaternion localRotation = transform.parent == null
-            ? rb.rotation
-            : Quaternion.Inverse(transform.parent.rotation) * rb.rotation;
-
-        Vector3 localAngles = localRotation.eulerAngles;
-        localAngles.x = NormalizeAngle(localAngles.x);
-        localAngles.z = NormalizeAngle(localAngles.z);
-
-        float limitedX = Mathf.Clamp(localAngles.x, -maximumTiltAngle, maximumTiltAngle);
-        float limitedZ = Mathf.Clamp(localAngles.z, -maximumTiltAngle, maximumTiltAngle);
-
-        if (Mathf.Approximately(localAngles.x, limitedX) &&
-            Mathf.Approximately(localAngles.z, limitedZ))
-        {
+        if (move.sqrMagnitude > 0.01f)
             return;
-        }
 
-        Quaternion limitedLocalRotation = Quaternion.Euler(
-            limitedX,
-            localRotation.eulerAngles.y,
-            limitedZ);
+        Quaternion upright = Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f);
+        targetRotation = Quaternion.Slerp(targetRotation, upright, Time.fixedDeltaTime * stabilizingSpeed);
 
-        rb.MoveRotation(transform.parent == null
-            ? limitedLocalRotation
-            : transform.parent.rotation * limitedLocalRotation);
+        rb.MoveRotation(targetRotation);
     }
 
-    private float NormalizeAngle(float angle)
+    void AnimatePropellers()
     {
-        return angle > 180.0f ? angle - 360.0f : angle;
+        float totalSpeed = propellerSpeed + Mathf.Abs(verticalInput) * 500f;
+
+        foreach (Transform prop in propellers)
+        {
+            prop.Rotate(Vector3.forward, totalSpeed * Time.deltaTime);
+        }
     }
 }

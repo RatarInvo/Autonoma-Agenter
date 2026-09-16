@@ -370,11 +370,11 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.17364816, y: -0, z: -0, w: 0.9848078}
-  m_LocalPosition: {x: -0.3999939, y: 11.4, z: -20.399994}
+  m_LocalPosition: {x: 448.7, y: 11.299999, z: 255.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1935619482}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 20, y: 0, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
@@ -1578,6 +1578,7 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1278308816}
   m_SourcePrefab: {fileID: 100100000, guid: befdde6fd81058948a13ce55df4ac035, type: 3}
+<<<<<<< Updated upstream
 --- !u!4 &1935619482 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1076196169278958764, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
@@ -1629,6 +1630,8 @@ MonoBehaviour:
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 2
   m_EndVerticalOffset: 0
+=======
+>>>>>>> Stashed changes
 --- !u!1001 &1953461120
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1640,6 +1643,10 @@ PrefabInstance:
     - target: {fileID: 406654488547587606, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
       propertyPath: m_Name
       value: Truck
+      objectReference: {fileID: 0}
+    - target: {fileID: 406654488547587609, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 406654488547587609, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
       propertyPath: enginePower
@@ -1731,6 +1738,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
+<<<<<<< Updated upstream
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1076196169278958764, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
       insertIndex: -1
@@ -1742,6 +1750,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 406654488547587606, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1935619488}
+=======
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+>>>>>>> Stashed changes
   m_SourcePrefab: {fileID: 100100000, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
 --- !u!1001 &2021624500
 PrefabInstance:
@@ -4841,6 +4853,7 @@ GameObject:
   - component: {fileID: 3357641206802454498}
   - component: {fileID: 3357641206802454502}
   - component: {fileID: 3357641206802454503}
+  - component: {fileID: 3357641206802454504}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -4940,14 +4953,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2146ca6cdf79acc4bb19258a54a86c29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DroneController
-  thrustChangeRate: 10
-  maximumThrustOffset: 20
-  thrustReturnRate: 10
-  tiltChangeRate: 30
-  tiltStabilizationTorque: 20
-  angularDamping: 5
-  maximumTiltAngle: 20
-  minimumCosine: 0.1
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 0
+  stabilizingSpeed: 3
+  movementForce: 20
+  tiltAngle: 30
+  tiltSpeed: 5
+  verticalDamping: 5
+  horizontalDamping: 1
+  propellers: []
+  propellerSpeed: 1000
+  requestDecisionsInCode: 1
+  finishLineReward: 1
 --- !u!114 &3357641206802454503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4955,7 +4974,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3357641206802454497}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ae2fb12b4c992f4998a6ca9947634a7, type: 3}
   m_Name: 
@@ -4963,6 +4982,37 @@ MonoBehaviour:
   camera: {fileID: 330585546}
   offset: {x: 0, y: 2, z: -9}
   followYRotation: 0
+--- !u!114 &3357641206802454504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3357641206802454497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
+  m_BrainParameters:
+    VectorObservationSize: 1
+    NumStackedVectorObservations: 1
+    m_ActionSpec:
+      m_NumContinuousActions: 0
+      BranchSizes: 030000000300000003000000
+    VectorActionSize: 030000000300000003000000
+    VectorActionDescriptions: []
+    VectorActionSpaceType: 0
+    hasUpgradedBrainParametersWithActionSpec: 1
+  m_Model: {fileID: 0}
+  m_InferenceDevice: 0
+  m_BehaviorType: 1
+  m_BehaviorName: My Behavior
+  TeamId: 0
+  m_UseChildSensors: 1
+  m_UseChildActuators: 1
+  m_DeterministicInference: 0
+  m_ObservableAttributeHandling: 0
 --- !u!1 &3357641206802454505
 GameObject:
   m_ObjectHideFlags: 0
@@ -5160,6 +5210,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 410087041}
+  - {fileID: 330585546}
   - {fileID: 832575519}
   - {fileID: 1953461120}
   - {fileID: 2021624500}
