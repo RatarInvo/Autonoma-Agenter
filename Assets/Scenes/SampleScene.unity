@@ -1578,7 +1578,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1278308816}
   m_SourcePrefab: {fileID: 100100000, guid: befdde6fd81058948a13ce55df4ac035, type: 3}
-<<<<<<< Updated upstream
 --- !u!4 &1935619482 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1076196169278958764, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
@@ -1630,8 +1629,6 @@ MonoBehaviour:
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 2
   m_EndVerticalOffset: 0
-=======
->>>>>>> Stashed changes
 --- !u!1001 &1953461120
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1738,7 +1735,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-<<<<<<< Updated upstream
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1076196169278958764, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
       insertIndex: -1
@@ -1750,10 +1746,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 406654488547587606, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1935619488}
-=======
-    m_AddedGameObjects: []
-    m_AddedComponents: []
->>>>>>> Stashed changes
   m_SourcePrefab: {fileID: 100100000, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
 --- !u!1001 &2021624500
 PrefabInstance:
