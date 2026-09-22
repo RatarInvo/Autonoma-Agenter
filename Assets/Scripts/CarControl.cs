@@ -7,8 +7,11 @@ public class CarControl : Agent
 {
     [Header("Car Settings")]
     public float enginePower = 2000.0f;
+    public float wallPenalty = -1.0f;
+    public float obstaclePenalty = -1.0f;
     public float turnSpeed = 25.0f;
     public float turnSmoothness = 5.0f;
+    public float maxBrakeTorque = 3000.0f;
 
     [Header("Car References")]
     public Transform[] wheels;
@@ -16,9 +19,53 @@ public class CarControl : Agent
     public Transform centerOfMass;
     public GameObject steeringWheel;
 
+    public Transform landingPad;
+
+    [Header("Arrival")]
+    public bool soloTraining = true;
+    public float arrivalRadius = 10.0f;
+    public float arrivalSpeed = 0.5f;
+    public int arrivalHoldSteps = 50;
+    public float arrivalReward = 5.0f;
+
+    [Header("Shaping")]
+    public float progressRewardScale = 1.0f;
+    public float timePenalty = -0.0002f;
+
+    [Header("Rollover")]
+    public float rolloverPenalty = -1.0f;
+    public float rolloverUprightLimit = 0.3f;
+    public int rolloverHoldSteps = 30;
+
+    [Header("Ground Probe")]
+    public float groundProbeDistance = 5.0f;
+    public LayerMask groundMask = ~0;
+
+    [Header("Observations")]
+    public float distanceNormalizer = 707.0f;
+
     private Rigidbody rb;
 
+    // training area for car
+    private TrainingArea area;
+
     private float currentTurnAngle = 0.0f;
+
+    private float previousDistance;
+
+    // distance at the start of an episode
+    private float initialDistance;
+
+    private int arrivalTimer;
+
+    private int rolloverTimer;
+
+    private bool parked;
+
+    // true once the rover is inside the meeting point
+    public bool IsParked => parked;
+
+    public Transform LandingPad => landingPad;
 
     // Starting position for resetting the car
     private Vector3 startPosition;
@@ -32,6 +79,8 @@ public class CarControl : Agent
 
         startPosition = transform.position;
         startRotation = transform.rotation;
+
+        area = GetComponentInParent<TrainingArea>();
     }
 
     public override void OnEpisodeBegin()
@@ -39,10 +88,33 @@ public class CarControl : Agent
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
 
-        transform.position = startPosition;
-        transform.rotation = startRotation;
+        Vector3 spawnPosition = startPosition;
+        Quaternion spawnRotation = startRotation;
+
+        if (area != null)
+        {
+            area.ResetArea();
+
+            spawnPosition = area.RoverSpawnPosition;
+            spawnRotation = area.RoverSpawnRotation;
+        }
+
+        transform.SetPositionAndRotation(spawnPosition, spawnRotation);
+
+        rb.position = spawnPosition;
+        rb.rotation = spawnRotation;
 
         currentTurnAngle = 0f;
+
+        arrivalTimer = 0;
+
+        rolloverTimer = 0;
+
+        parked = false;
+
+        previousDistance = HorizontalDistanceToFinish();
+
+        initialDistance = Mathf.Max(previousDistance, 1f);
 
         foreach (Transform wheel in wheels)
         {
@@ -55,6 +127,15 @@ public class CarControl : Agent
     }
 
     public Transform finishPoint;
+
+    private float HorizontalDistanceToFinish()
+    {
+        Vector3 delta = finishPoint.position - transform.position;
+
+        delta.y = 0f;
+
+        return delta.magnitude;
+    }
 
     public override void CollectObservations(VectorSensor sensor)
     {
@@ -76,23 +157,36 @@ public class CarControl : Agent
 
         Vector3 directionToFinish = finishPoint.position - transform.position;
 
-        float distanceToFinish = directionToFinish.magnitude;
+        directionToFinish.y = 0f;
 
         Vector3 localDirection = transform.InverseTransformDirection(directionToFinish.normalized);
 
         sensor.AddObservation(localDirection);
 
-        sensor.AddObservation(Mathf.Clamp(distanceToFinish / 100f, 0f, 1f));
+        sensor.AddObservation(Mathf.Clamp01(HorizontalDistanceToFinish() / distanceNormalizer));
+
+        sensor.AddObservation(transform.up.x);
+
+        sensor.AddObservation(transform.up.z);
+
+        Vector3 localNormal = GroundNormalLocal();
+
+        sensor.AddObservation(localNormal.x);
+
+        sensor.AddObservation(localNormal.z);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private Vector3 GroundNormalLocal()
     {
-        if (other.CompareTag("finishline"))
-        {
-            AddReward(1.0f);
+        bool hit = Physics.Raycast(transform.position + Vector3.up, Vector3.down, out RaycastHit ground,
+            groundProbeDistance, groundMask, QueryTriggerInteraction.Ignore);
 
-            EndEpisode();
+        if (!hit)
+        {
+            return Vector3.zero;
         }
+
+        return transform.InverseTransformDirection(ground.normal);
     }
 
     public override void OnActionReceived(ActionBuffers actions)
@@ -101,20 +195,21 @@ public class CarControl : Agent
 
         float throttle = Mathf.Clamp(actions.ContinuousActions[1], -1f, 1f);
 
-        ApplyCarControls(steering, throttle);
+        float brake = Mathf.Clamp01(actions.ContinuousActions[2]);
 
-        // Encourage forward movement
-        float forwardSpeed = Vector3.Dot(rb.linearVelocity, transform.forward);
+        ApplyCarControls(steering, throttle, brake);
 
-        float normalizedSpeed = Mathf.Clamp01(forwardSpeed / 20f);
+        float distanceToFinish = HorizontalDistanceToFinish();
 
-        AddReward(normalizedSpeed * 0.01f);
+        AddReward((previousDistance - distanceToFinish) / initialDistance * progressRewardScale);
+
+        previousDistance = distanceToFinish;
 
         // Small penalty for taking time
-        AddReward(-0.001f);
+        AddReward(timePenalty);
     }
 
-    private void ApplyCarControls(float steering, float throttle)
+    private void ApplyCarControls(float steering, float throttle, float brake)
     {
         // Convert ML action (-1 to +1)
         // into actual steering angle.
@@ -146,6 +241,8 @@ public class CarControl : Agent
             // All wheels receive engine torque
             wheelCollider.motorTorque = throttle * enginePower;
 
+            wheelCollider.brakeTorque = brake * maxBrakeTorque;
+
             // Update visual wheel
             if (i < wheelMeshes.Length)
             {
@@ -167,6 +264,7 @@ public class CarControl : Agent
 
         float steering = 0f;
         float throttle = 0f;
+        float brake = 0f;
 
         if (Input.GetKey(KeyCode.LeftArrow))
         {
@@ -186,22 +284,101 @@ public class CarControl : Agent
             throttle = -1f;
         }
 
+        if (Input.GetKey(KeyCode.Space))
+        {
+            brake = 1f;
+        }
+
         actions[0] = steering;
         actions[1] = throttle;
+        actions[2] = brake;
+    }
+
+    private void FixedUpdate()
+    {
+        CheckArrival();
+
+        CheckRollover();
+    }
+
+    private void CheckArrival()
+    {
+        float distanceToFinish = HorizontalDistanceToFinish();
+
+        bool stoppedInside = distanceToFinish <= arrivalRadius && rb.linearVelocity.magnitude <= arrivalSpeed;
+
+        if (!stoppedInside)
+        {
+            arrivalTimer = 0;
+
+            parked = false;
+
+            return;
+        }
+
+        if (parked)
+        {
+            return;
+        }
+
+        arrivalTimer++;
+
+        if (arrivalTimer < arrivalHoldSteps)
+        {
+            return;
+        }
+
+        // held inside the meeting point long enough to count as parked.
+        parked = true;
+
+        AddReward(arrivalReward);
+
+        if (soloTraining)
+        {
+            EndEpisode();
+        }
+    }
+
+    private void CheckRollover()
+    {
+        if (transform.up.y > rolloverUprightLimit)
+        {
+            rolloverTimer = 0;
+
+            return;
+        }
+
+        rolloverTimer++;
+
+        if (rolloverTimer < rolloverHoldSteps)
+        {
+            return;
+        }
+
+        AddReward(rolloverPenalty);
+
+        EndEpisode();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("building"))
         {
-            AddReward(-1f);
+            AddReward(obstaclePenalty);
 
             EndEpisode();
         }
 
         if (collision.gameObject.CompareTag("rock"))
         {
-            AddReward(-1f);
+            AddReward(obstaclePenalty);
+
+            EndEpisode();
+        }
+
+        if (collision.gameObject.CompareTag("walls"))
+        {
+            AddReward(wallPenalty);
 
             EndEpisode();
         }
