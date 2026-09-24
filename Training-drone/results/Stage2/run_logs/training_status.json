@@ -1,0 +1,56 @@
+{
+    "My Behavior": {
+        "checkpoints": [
+            {
+                "steps": 499907,
+                "file_path": "results\\Stage2\\My Behavior\\My Behavior-499907.onnx",
+                "reward": -1.366399995982647,
+                "creation_time": 1790254307.1716046,
+                "auxillary_file_paths": [
+                    "results\\Stage2\\My Behavior\\My Behavior-499907.pt"
+                ]
+            },
+            {
+                "steps": 999977,
+                "file_path": "results\\Stage2\\My Behavior\\My Behavior-999977.onnx",
+                "reward": -1.3999998830258846,
+                "creation_time": 1790254595.8871667,
+                "auxillary_file_paths": [
+                    "results\\Stage2\\My Behavior\\My Behavior-999977.pt"
+                ]
+            },
+            {
+                "steps": 1499929,
+                "file_path": "results\\Stage2\\My Behavior\\My Behavior-1499929.onnx",
+                "reward": null,
+                "creation_time": 1790254888.07174,
+                "auxillary_file_paths": [
+                    "results\\Stage2\\My Behavior\\My Behavior-1499929.pt"
+                ]
+            },
+            {
+                "steps": 1591712,
+                "file_path": "results\\Stage2\\My Behavior\\My Behavior-1591712.onnx",
+                "reward": null,
+                "creation_time": 1790254941.4148066,
+                "auxillary_file_paths": [
+                    "results\\Stage2\\My Behavior\\My Behavior-1591712.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1591712,
+            "file_path": "results\\Stage2\\My Behavior.onnx",
+            "reward": null,
+            "creation_time": 1790254941.4148066,
+            "auxillary_file_paths": [
+                "results\\Stage2\\My Behavior\\My Behavior-1591712.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.1.1+cpu"
+    }
+}

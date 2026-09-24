@@ -35,7 +35,7 @@ behaviors:
           memory: null
           goal_conditioning_type: hyper
           deterministic: false
-    init_path: null
+    init_path: results\Stage1\My Behavior\checkpoint.pt
     keep_checkpoints: 5
     even_checkpoints: false
     max_steps: 5000000
@@ -66,10 +66,10 @@ engine_settings:
   no_graphics_monitor: false
 environment_parameters: null
 checkpoint_settings:
-  run_id: Stage1
-  initialize_from: null
+  run_id: Stage2
+  initialize_from: Stage1
   load_model: false
-  resume: true
+  resume: false
   force: false
   train_model: false
   inference: false

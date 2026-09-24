@@ -7,8 +7,7 @@ using Unity.MLAgents.Sensors;
 public class DroneMove : Agent
 {       
     public float stabilizingSpeed = 3f; 
-    private float baseThrustOffset = 0f;   
-    private float defaultBaseThrust;        
+    private float baseThrustOffset = 0f;       
     public float movementForce = 20f;         
     public float tiltAngle = 30f;           
     public float tiltSpeed = 5f;                      
@@ -16,41 +15,40 @@ public class DroneMove : Agent
     public float horizontalDamping = 1f;
 
     [Header("Finish Line")]
-    [SerializeField] private int finishHoldSteps = 50;
-    [SerializeField] private float finishHoldSpeed = 0.5f;
-    [SerializeField] private float finishHoldReward = 0.02f;
-    [SerializeField] private float timePenalty = -0.0002f;
     [SerializeField] private float rayLength = 40f;
     [SerializeField] private LayerMask rayMask = ~0;
+    [SerializeField] private float finishReward = 1f;
+    [SerializeField] private float progressRewardScale = 0.1f;
+    [SerializeField] private float timePenalty = -0.001f;
 
     public Transform[] propellers;            
-    public float propellerSpeed = 1000f;      
-    [SerializeField] private bool requestDecisionsInCode = true;
-    [SerializeField] private float finishLineReward = 1f;
-
+    public float propellerSpeed = 500f;      
     private Rigidbody rb;
     private Quaternion targetRotation;
     private Vector3 startingPosition;
     private Quaternion startingRotation;
     private float verticalInput;
     private Vector2 movementInput;
-    private bool reachedFinishLine;
-    private int finishHoldTimer;
+    private bool episodeEnding;
+    private float previousFinishDistance;
 
-        protected override void Awake()
+    protected override void Awake()
     {
         rb = GetComponent<Rigidbody>();
         startingPosition = transform.position;
         startingRotation = transform.rotation;
         targetRotation = startingRotation;
+        MaxStep = 4000;
     }
 
-        public override void OnEpisodeBegin()
-        {
-            Reset();
-        }
+    public override void OnEpisodeBegin()
+    {
+        episodeEnding = false;
+        Reset();
+        previousFinishDistance = FinishDistance();
+    }
 
-        public void Reset()
+    public void Reset()
     {
         transform.SetPositionAndRotation(startingPosition, startingRotation);
 
@@ -60,34 +58,55 @@ public class DroneMove : Agent
             body.linearVelocity = Vector3.zero;
             body.angularVelocity = Vector3.zero;
         }
-
         verticalInput = 0f;
         movementInput = Vector2.zero;
-        reachedFinishLine = false;
-        finishHoldTimer = 0;
         targetRotation = startingRotation;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (IsTaggedAsFinishLine(collision.collider))
+        {
+            CompleteEpisode();
+            return;
+        }
+
         if (IsTaggedAsBuilding(collision.collider))
             ResetAfterBuildingHit();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (IsTaggedAsBuilding(other))
+        if (IsTaggedAsFinishLine(other))
+            CompleteEpisode();
+    }
+
+    private bool IsTaggedAsFinishLine(Collider collider)
+    {
+        Transform current = collider.transform;
+
+        while (current != null)
         {
-            ResetAfterBuildingHit();
-            return;
+            if (current.CompareTag("finishline"))
+                return true;
+
+            current = current.parent;
         }
 
-        if (reachedFinishLine || !other.CompareTag("finishline"))
+        return false;
+    }
+
+    private void CompleteEpisode()
+    {
+        if (episodeEnding)
             return;
 
-        reachedFinishLine = true;
-        finishHoldTimer = 0;
+        episodeEnding = true;
+        AddReward(finishReward);
+        EndEpisode();
     }
+
+
 
     private bool IsTaggedAsBuilding(Collider collider)
     {
@@ -109,16 +128,6 @@ public class DroneMove : Agent
         AddReward(-1f);
         EndEpisode();
     }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (!other.CompareTag("finishline"))
-            return;
-
-        reachedFinishLine = false;
-        finishHoldTimer = 0;
-    }
-
     public override void CollectObservations(VectorSensor sensor)
     {
         Vector3 localVelocity = transform.InverseTransformDirection(rb.linearVelocity);
@@ -136,13 +145,33 @@ public class DroneMove : Agent
 
         RaycastHit finishHit;
         Vector3 finishDirection = FindClosestTaggedRay("finishline", out finishHit);
+        
         Vector3 localFinishDirection = transform.InverseTransformDirection(finishDirection);
         sensor.AddObservation(localFinishDirection.x);
         sensor.AddObservation(localFinishDirection.z);
         sensor.AddObservation(finishHit.collider == null ? 1f : finishHit.distance / rayLength);
+    
 
         sensor.AddObservation(BuildingRayDistance(transform.forward));
         sensor.AddObservation(BuildingRayDistance(transform.right));
+        sensor.AddObservation(GroundRayDistance(Vector3.down));
+        sensor.AddObservation(GroundRayDistance(Vector3.up));
+    }
+
+    private float GroundRayDistance(Vector3 direction)
+    {
+    if (Physics.Raycast(
+            transform.position,
+            direction,
+            out RaycastHit hit,
+            rayLength,
+            rayMask,
+            QueryTriggerInteraction.Ignore))
+    {
+        return Mathf.Clamp01(hit.distance / rayLength);
+    }
+
+    return 1f;
     }
 
     private Vector3 FindClosestTaggedRay(string tag, out RaycastHit closestHit)
@@ -166,6 +195,12 @@ public class DroneMove : Agent
         }
 
         return closestDirection;
+    }
+
+    private float FinishDistance()
+    {
+        FindClosestTaggedRay("finishline", out RaycastHit finishHit);
+        return finishHit.collider == null ? rayLength : finishHit.distance;
     }
 
     private float BuildingRayDistance(Vector3 direction)
@@ -231,41 +266,20 @@ public class DroneMove : Agent
         else if (discreteActions[2] == 2)
             verticalInput = -movementForce;
 
+        float finishDistance = FinishDistance();
+        AddReward((previousFinishDistance - finishDistance) / rayLength * progressRewardScale);
+        previousFinishDistance = finishDistance;
         AddReward(timePenalty);
     }
 
     private void FixedUpdate()
     {
-        if (requestDecisionsInCode)
-            RequestDecision();
-
+        RequestDecision();
         Hover(verticalInput);
         TiltDrone(movementInput);
         MoveDrone(movementInput);
         StabilizeHorizontalDrift();
         AutoLevel(movementInput);
-        CheckFinishLineHold();
-    }
-
-    private void CheckFinishLineHold()
-    {
-        if (!reachedFinishLine)
-            return;
-
-        if (rb.linearVelocity.magnitude > finishHoldSpeed)
-        {
-            finishHoldTimer = 0;
-            return;
-        }
-
-        finishHoldTimer++;
-        AddReward(finishHoldReward);
-
-        if (finishHoldTimer < finishHoldSteps)
-            return;
-
-        AddReward(finishLineReward);
-        EndEpisode();
     }
 
     void Update()

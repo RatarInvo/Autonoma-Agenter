@@ -10,6 +10,7 @@ behaviors:
       epsilon: 0.2
       lambd: 0.95
       num_epoch: 3
+      shared_critic: false
       learning_rate_schedule: linear
       beta_schedule: linear
       epsilon_schedule: linear
@@ -18,29 +19,40 @@ behaviors:
       normalize: true
       hidden_units: 128
       num_layers: 2
+      vis_encode_type: simple
+      memory: null
+      goal_conditioning_type: none
+      deterministic: false
 
     reward_signals:
       extrinsic:
-        gamma: 0.995
+        gamma: 0.99
         strength: 1.0
 
-    keep_checkpoints: 10
-    checkpoint_interval: 5000000
+    keep_checkpoints: 5
+    checkpoint_interval: 500000
     max_steps: 5000000
-    time_horizon: 256
-    summary_freq: 20000
+    time_horizon: 128
+    summary_freq: 50000
     threaded: false
 
 env_settings:
-  num_envs: 1
+  env_path: null
   base_port: 5005
+  num_envs: 1
+  num_areas: 1
+  timeout_wait: 60
   seed: -1
 
 engine_settings:
-  width: 84
-  height: 84
-  quality_level: 0
   time_scale: 20
-  target_frame_rate: -1
-  capture_frame_rate: 60
   no_graphics: true
+
+checkpoint_settings:
+  run_id: Test2
+  resume: false
+  force: false
+  inference: false
+  results_dir: results
+
+debug: false

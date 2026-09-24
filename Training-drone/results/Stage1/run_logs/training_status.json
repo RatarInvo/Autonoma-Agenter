@@ -2,22 +2,40 @@
     "My Behavior": {
         "checkpoints": [
             {
-                "steps": 64615,
-                "file_path": "results\\Stage1\\My Behavior\\My Behavior-64615.onnx",
-                "reward": -1.0799000412225723,
-                "creation_time": 1790210588.9775157,
+                "steps": 499986,
+                "file_path": "results\\Stage1\\My Behavior\\My Behavior-499986.onnx",
+                "reward": 5.298401870727539,
+                "creation_time": 1790253270.344778,
                 "auxillary_file_paths": [
-                    "results\\Stage1\\My Behavior\\My Behavior-64615.pt"
+                    "results\\Stage1\\My Behavior\\My Behavior-499986.pt"
+                ]
+            },
+            {
+                "steps": 509499,
+                "file_path": "results\\Stage1\\My Behavior\\My Behavior-509499.onnx",
+                "reward": 5.297960762544112,
+                "creation_time": 1790253280.4750884,
+                "auxillary_file_paths": [
+                    "results\\Stage1\\My Behavior\\My Behavior-509499.pt"
+                ]
+            },
+            {
+                "steps": 533353,
+                "file_path": "results\\Stage1\\My Behavior\\My Behavior-533353.onnx",
+                "reward": -1.026072019636631,
+                "creation_time": 1790253757.2797298,
+                "auxillary_file_paths": [
+                    "results\\Stage1\\My Behavior\\My Behavior-533353.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 64615,
+            "steps": 533353,
             "file_path": "results\\Stage1\\My Behavior.onnx",
-            "reward": -1.0799000412225723,
-            "creation_time": 1790210588.9775157,
+            "reward": -1.026072019636631,
+            "creation_time": 1790253757.2797298,
             "auxillary_file_paths": [
-                "results\\Stage1\\My Behavior\\My Behavior-64615.pt"
+                "results\\Stage1\\My Behavior\\My Behavior-533353.pt"
             ]
         }
     },

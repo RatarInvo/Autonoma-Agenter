@@ -318,7 +318,7 @@ MonoBehaviour:
   m_RaysPerDirection: 5
   m_MaxRayDegrees: 60
   m_SphereCastRadius: 0.7
-  m_RayLength: 40
+  m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
@@ -342,7 +342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 13
+    VectorObservationSize: 15
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -405,6 +405,9 @@ MonoBehaviour:
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  finishApproachReward: 0.01
+  finishMoveAwayPenalty: 0.002
+  finishCompletionDistance: 1.5
   propellers: []
   propellerSpeed: 1000
   requestDecisionsInCode: 1
@@ -3836,7 +3839,7 @@ MonoBehaviour:
   m_RaysPerDirection: 5
   m_MaxRayDegrees: 60
   m_SphereCastRadius: 0.7
-  m_RayLength: 40
+  m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
@@ -3860,7 +3863,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 13
+    VectorObservationSize: 15
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -3923,6 +3926,9 @@ MonoBehaviour:
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  finishApproachReward: 0.01
+  finishMoveAwayPenalty: 0.002
+  finishCompletionDistance: 1.5
   propellers: []
   propellerSpeed: 1000
   requestDecisionsInCode: 1
@@ -13476,7 +13482,7 @@ MonoBehaviour:
   m_RaysPerDirection: 5
   m_MaxRayDegrees: 60
   m_SphereCastRadius: 0.7
-  m_RayLength: 40
+  m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
@@ -13500,7 +13506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 13
+    VectorObservationSize: 15
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -13563,6 +13569,9 @@ MonoBehaviour:
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  finishApproachReward: 0.01
+  finishMoveAwayPenalty: 0.002
+  finishCompletionDistance: 1.5
   propellers: []
   propellerSpeed: 1000
   requestDecisionsInCode: 1
@@ -22466,7 +22475,7 @@ MonoBehaviour:
   m_RaysPerDirection: 5
   m_MaxRayDegrees: 60
   m_SphereCastRadius: 0.7
-  m_RayLength: 40
+  m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
@@ -22490,7 +22499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 13
+    VectorObservationSize: 15
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -22553,6 +22562,9 @@ MonoBehaviour:
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  finishApproachReward: 0.01
+  finishMoveAwayPenalty: 0.002
+  finishCompletionDistance: 1.5
   propellers: []
   propellerSpeed: 1000
   requestDecisionsInCode: 1
@@ -25586,7 +25598,7 @@ MonoBehaviour:
   m_RaysPerDirection: 5
   m_MaxRayDegrees: 60
   m_SphereCastRadius: 0.7
-  m_RayLength: 40
+  m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
@@ -25610,7 +25622,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 13
+    VectorObservationSize: 15
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -25673,6 +25685,9 @@ MonoBehaviour:
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  finishApproachReward: 0.01
+  finishMoveAwayPenalty: 0.002
+  finishCompletionDistance: 1.5
   propellers: []
   propellerSpeed: 1000
   requestDecisionsInCode: 1
@@ -26844,7 +26859,7 @@ MonoBehaviour:
   m_RaysPerDirection: 5
   m_MaxRayDegrees: 60
   m_SphereCastRadius: 0.7
-  m_RayLength: 40
+  m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
@@ -26868,7 +26883,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 13
+    VectorObservationSize: 15
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -26931,6 +26946,9 @@ MonoBehaviour:
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  finishApproachReward: 0.01
+  finishMoveAwayPenalty: 0.002
+  finishCompletionDistance: 1.5
   propellers: []
   propellerSpeed: 1000
   requestDecisionsInCode: 1
@@ -27606,7 +27624,7 @@ MonoBehaviour:
   m_RaysPerDirection: 5
   m_MaxRayDegrees: 60
   m_SphereCastRadius: 0.7
-  m_RayLength: 40
+  m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
@@ -27630,7 +27648,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 13
+    VectorObservationSize: 15
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -27693,6 +27711,9 @@ MonoBehaviour:
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  finishApproachReward: 0.01
+  finishMoveAwayPenalty: 0.002
+  finishCompletionDistance: 1.5
   propellers: []
   propellerSpeed: 1000
   requestDecisionsInCode: 1
@@ -27906,7 +27927,7 @@ MonoBehaviour:
   m_RaysPerDirection: 5
   m_MaxRayDegrees: 60
   m_SphereCastRadius: 0.7
-  m_RayLength: 40
+  m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
@@ -27930,7 +27951,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 13
+    VectorObservationSize: 15
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -27993,6 +28014,9 @@ MonoBehaviour:
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  finishApproachReward: 0.01
+  finishMoveAwayPenalty: 0.002
+  finishCompletionDistance: 1.5
   propellers: []
   propellerSpeed: 1000
   requestDecisionsInCode: 1
@@ -31910,7 +31934,7 @@ MonoBehaviour:
   m_RaysPerDirection: 5
   m_MaxRayDegrees: 60
   m_SphereCastRadius: 0.7
-  m_RayLength: 40
+  m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
@@ -31934,7 +31958,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 13
+    VectorObservationSize: 15
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -31997,6 +32021,9 @@ MonoBehaviour:
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  finishApproachReward: 0.01
+  finishMoveAwayPenalty: 0.002
+  finishCompletionDistance: 1.5
   propellers: []
   propellerSpeed: 1000
   requestDecisionsInCode: 1
@@ -37075,7 +37102,7 @@ MonoBehaviour:
   m_RaysPerDirection: 5
   m_MaxRayDegrees: 60
   m_SphereCastRadius: 0.7
-  m_RayLength: 40
+  m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
@@ -37099,7 +37126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 13
+    VectorObservationSize: 15
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -37162,6 +37189,9 @@ MonoBehaviour:
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  finishApproachReward: 0.01
+  finishMoveAwayPenalty: 0.002
+  finishCompletionDistance: 1.5
   propellers: []
   propellerSpeed: 1000
   requestDecisionsInCode: 1
@@ -46154,7 +46184,7 @@ MonoBehaviour:
   m_RaysPerDirection: 5
   m_MaxRayDegrees: 60
   m_SphereCastRadius: 0.7
-  m_RayLength: 40
+  m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
@@ -46178,7 +46208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 13
+    VectorObservationSize: 15
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -46241,6 +46271,9 @@ MonoBehaviour:
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  finishApproachReward: 0.01
+  finishMoveAwayPenalty: 0.002
+  finishCompletionDistance: 1.5
   propellers: []
   propellerSpeed: 1000
   requestDecisionsInCode: 1
@@ -52093,7 +52126,7 @@ MonoBehaviour:
   m_RaysPerDirection: 5
   m_MaxRayDegrees: 60
   m_SphereCastRadius: 0.7
-  m_RayLength: 40
+  m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
@@ -52117,7 +52150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 13
+    VectorObservationSize: 15
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -52180,6 +52213,9 @@ MonoBehaviour:
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  finishApproachReward: 0.01
+  finishMoveAwayPenalty: 0.002
+  finishCompletionDistance: 1.5
   propellers: []
   propellerSpeed: 1000
   requestDecisionsInCode: 1
@@ -52941,7 +52977,7 @@ MonoBehaviour:
   m_RaysPerDirection: 5
   m_MaxRayDegrees: 60
   m_SphereCastRadius: 0.7
-  m_RayLength: 40
+  m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
@@ -52965,7 +53001,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 13
+    VectorObservationSize: 15
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -53028,6 +53064,9 @@ MonoBehaviour:
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  finishApproachReward: 0.01
+  finishMoveAwayPenalty: 0.002
+  finishCompletionDistance: 1.5
   propellers: []
   propellerSpeed: 1000
   requestDecisionsInCode: 1
@@ -55715,7 +55754,7 @@ MonoBehaviour:
   m_RaysPerDirection: 5
   m_MaxRayDegrees: 60
   m_SphereCastRadius: 0.7
-  m_RayLength: 40
+  m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
@@ -55739,7 +55778,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 13
+    VectorObservationSize: 15
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -55802,6 +55841,9 @@ MonoBehaviour:
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  finishApproachReward: 0.01
+  finishMoveAwayPenalty: 0.002
+  finishCompletionDistance: 1.5
   propellers: []
   propellerSpeed: 1000
   requestDecisionsInCode: 1
@@ -58696,7 +58738,7 @@ MonoBehaviour:
   m_RaysPerDirection: 5
   m_MaxRayDegrees: 60
   m_SphereCastRadius: 0.7
-  m_RayLength: 40
+  m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
@@ -58720,7 +58762,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 13
+    VectorObservationSize: 15
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -58783,6 +58825,9 @@ MonoBehaviour:
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  finishApproachReward: 0.01
+  finishMoveAwayPenalty: 0.002
+  finishCompletionDistance: 1.5
   propellers: []
   propellerSpeed: 1000
   requestDecisionsInCode: 1
@@ -63458,7 +63503,7 @@ MonoBehaviour:
   m_RaysPerDirection: 5
   m_MaxRayDegrees: 60
   m_SphereCastRadius: 0.7
-  m_RayLength: 40
+  m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
@@ -63482,7 +63527,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 13
+    VectorObservationSize: 15
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -63545,6 +63590,9 @@ MonoBehaviour:
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  finishApproachReward: 0.01
+  finishMoveAwayPenalty: 0.002
+  finishCompletionDistance: 1.5
   propellers: []
   propellerSpeed: 1000
   requestDecisionsInCode: 1
@@ -67957,7 +68005,7 @@ MonoBehaviour:
   m_RaysPerDirection: 5
   m_MaxRayDegrees: 60
   m_SphereCastRadius: 0.7
-  m_RayLength: 40
+  m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
@@ -67981,7 +68029,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 13
+    VectorObservationSize: 15
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -68044,6 +68092,9 @@ MonoBehaviour:
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  finishApproachReward: 0.01
+  finishMoveAwayPenalty: 0.002
+  finishCompletionDistance: 1.5
   propellers: []
   propellerSpeed: 1000
   requestDecisionsInCode: 1
@@ -76799,7 +76850,7 @@ MonoBehaviour:
   m_RaysPerDirection: 5
   m_MaxRayDegrees: 60
   m_SphereCastRadius: 0.7
-  m_RayLength: 40
+  m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
@@ -76823,7 +76874,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 13
+    VectorObservationSize: 15
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -76886,6 +76937,9 @@ MonoBehaviour:
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  finishApproachReward: 0.01
+  finishMoveAwayPenalty: 0.002
+  finishCompletionDistance: 1.5
   propellers: []
   propellerSpeed: 1000
   requestDecisionsInCode: 1
@@ -77997,7 +78051,7 @@ MonoBehaviour:
   m_RaysPerDirection: 5
   m_MaxRayDegrees: 60
   m_SphereCastRadius: 0.7
-  m_RayLength: 40
+  m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
@@ -78021,7 +78075,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 13
+    VectorObservationSize: 15
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -78084,6 +78138,9 @@ MonoBehaviour:
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  finishApproachReward: 0.01
+  finishMoveAwayPenalty: 0.002
+  finishCompletionDistance: 1.5
   propellers: []
   propellerSpeed: 1000
   requestDecisionsInCode: 1
@@ -80002,7 +80059,7 @@ MonoBehaviour:
   m_RaysPerDirection: 5
   m_MaxRayDegrees: 60
   m_SphereCastRadius: 0.7
-  m_RayLength: 40
+  m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
@@ -80026,7 +80083,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 13
+    VectorObservationSize: 15
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -80089,6 +80146,9 @@ MonoBehaviour:
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  finishApproachReward: 0.01
+  finishMoveAwayPenalty: 0.002
+  finishCompletionDistance: 1.5
   propellers: []
   propellerSpeed: 1000
   requestDecisionsInCode: 1
@@ -87953,7 +88013,7 @@ MonoBehaviour:
   m_RaysPerDirection: 5
   m_MaxRayDegrees: 60
   m_SphereCastRadius: 0.7
-  m_RayLength: 40
+  m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
@@ -87977,7 +88037,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 13
+    VectorObservationSize: 15
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -88040,6 +88100,9 @@ MonoBehaviour:
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  finishApproachReward: 0.01
+  finishMoveAwayPenalty: 0.002
+  finishCompletionDistance: 1.5
   propellers: []
   propellerSpeed: 1000
   requestDecisionsInCode: 1
@@ -88468,7 +88531,7 @@ MonoBehaviour:
   m_RaysPerDirection: 5
   m_MaxRayDegrees: 60
   m_SphereCastRadius: 0.7
-  m_RayLength: 40
+  m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
@@ -88492,7 +88555,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 13
+    VectorObservationSize: 15
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -88555,6 +88618,9 @@ MonoBehaviour:
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  finishApproachReward: 0.01
+  finishMoveAwayPenalty: 0.002
+  finishCompletionDistance: 1.5
   propellers: []
   propellerSpeed: 1000
   requestDecisionsInCode: 1
@@ -90041,7 +90107,7 @@ MonoBehaviour:
   m_RaysPerDirection: 5
   m_MaxRayDegrees: 60
   m_SphereCastRadius: 0.7
-  m_RayLength: 40
+  m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
@@ -90065,7 +90131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 13
+    VectorObservationSize: 15
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -90128,6 +90194,9 @@ MonoBehaviour:
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  finishApproachReward: 0.01
+  finishMoveAwayPenalty: 0.002
+  finishCompletionDistance: 1.5
   propellers: []
   propellerSpeed: 1000
   requestDecisionsInCode: 1
@@ -92587,7 +92656,7 @@ MonoBehaviour:
   m_RaysPerDirection: 5
   m_MaxRayDegrees: 60
   m_SphereCastRadius: 0.7
-  m_RayLength: 40
+  m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
@@ -92611,7 +92680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 13
+    VectorObservationSize: 15
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -92674,6 +92743,9 @@ MonoBehaviour:
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  finishApproachReward: 0.01
+  finishMoveAwayPenalty: 0.002
+  finishCompletionDistance: 1.5
   propellers: []
   propellerSpeed: 1000
   requestDecisionsInCode: 1
