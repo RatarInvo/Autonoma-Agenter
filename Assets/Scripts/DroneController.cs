@@ -15,6 +15,14 @@ public class DroneMove : Agent
     public float verticalDamping = 5f;
     public float horizontalDamping = 1f;
 
+    [Header("Finish Line")]
+    [SerializeField] private int finishHoldSteps = 50;
+    [SerializeField] private float finishHoldSpeed = 0.5f;
+    [SerializeField] private float finishHoldReward = 0.02f;
+    [SerializeField] private float timePenalty = -0.0002f;
+    [SerializeField] private float rayLength = 40f;
+    [SerializeField] private LayerMask rayMask = ~0;
+
     public Transform[] propellers;            
     public float propellerSpeed = 1000f;      
     [SerializeField] private bool requestDecisionsInCode = true;
@@ -27,8 +35,9 @@ public class DroneMove : Agent
     private float verticalInput;
     private Vector2 movementInput;
     private bool reachedFinishLine;
+    private int finishHoldTimer;
 
-        private void Awake()
+        protected override void Awake()
     {
         rb = GetComponent<Rigidbody>();
         startingPosition = transform.position;
@@ -55,25 +64,117 @@ public class DroneMove : Agent
         verticalInput = 0f;
         movementInput = Vector2.zero;
         reachedFinishLine = false;
+        finishHoldTimer = 0;
+        targetRotation = startingRotation;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("building"))
-        {
-            AddReward(-1); // Penalty for hitting a wall
-            EndEpisode(); // End the episode after hitting a wall
-        }
+        if (IsTaggedAsBuilding(collision.collider))
+            ResetAfterBuildingHit();
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        if (IsTaggedAsBuilding(other))
+        {
+            ResetAfterBuildingHit();
+            return;
+        }
+
         if (reachedFinishLine || !other.CompareTag("finishline"))
             return;
 
         reachedFinishLine = true;
-        AddReward(finishLineReward);
+        finishHoldTimer = 0;
+    }
+
+    private bool IsTaggedAsBuilding(Collider collider)
+    {
+        Transform current = collider.transform;
+
+        while (current != null)
+        {
+            if (current.CompareTag("building"))
+                return true;
+
+            current = current.parent;
+        }
+
+        return false;
+    }
+
+    private void ResetAfterBuildingHit()
+    {
+        AddReward(-1f);
         EndEpisode();
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (!other.CompareTag("finishline"))
+            return;
+
+        reachedFinishLine = false;
+        finishHoldTimer = 0;
+    }
+
+    public override void CollectObservations(VectorSensor sensor)
+    {
+        Vector3 localVelocity = transform.InverseTransformDirection(rb.linearVelocity);
+        sensor.AddObservation(Mathf.Clamp(localVelocity.x / movementForce, -1f, 1f));
+        sensor.AddObservation(Mathf.Clamp(localVelocity.y / movementForce, -1f, 1f));
+        sensor.AddObservation(Mathf.Clamp(localVelocity.z / movementForce, -1f, 1f));
+
+        Vector3 localAngularVelocity = transform.InverseTransformDirection(rb.angularVelocity);
+        sensor.AddObservation(Mathf.Clamp(localAngularVelocity.x / 10f, -1f, 1f));
+        sensor.AddObservation(Mathf.Clamp(localAngularVelocity.y / 10f, -1f, 1f));
+        sensor.AddObservation(Mathf.Clamp(localAngularVelocity.z / 10f, -1f, 1f));
+
+        sensor.AddObservation(transform.up.x);
+        sensor.AddObservation(transform.up.z);
+
+        RaycastHit finishHit;
+        Vector3 finishDirection = FindClosestTaggedRay("finishline", out finishHit);
+        Vector3 localFinishDirection = transform.InverseTransformDirection(finishDirection);
+        sensor.AddObservation(localFinishDirection.x);
+        sensor.AddObservation(localFinishDirection.z);
+        sensor.AddObservation(finishHit.collider == null ? 1f : finishHit.distance / rayLength);
+
+        sensor.AddObservation(BuildingRayDistance(transform.forward));
+        sensor.AddObservation(BuildingRayDistance(transform.right));
+    }
+
+    private Vector3 FindClosestTaggedRay(string tag, out RaycastHit closestHit)
+    {
+        closestHit = default;
+        float closestDistance = rayLength;
+        Vector3 closestDirection = Vector3.zero;
+
+        for (int i = 0; i < 8; i++)
+        {
+            float angle = i * 45f;
+            Vector3 direction = Quaternion.Euler(0f, angle, 0f) * transform.forward;
+
+            if (!Physics.Raycast(transform.position, direction, out RaycastHit hit, rayLength, rayMask,
+                    QueryTriggerInteraction.Collide) || !hit.collider.CompareTag(tag) || hit.distance >= closestDistance)
+                continue;
+
+            closestHit = hit;
+            closestDistance = hit.distance;
+            closestDirection = direction;
+        }
+
+        return closestDirection;
+    }
+
+    private float BuildingRayDistance(Vector3 direction)
+    {
+        if (Physics.Raycast(transform.position, direction, out RaycastHit hit, rayLength, rayMask,
+                QueryTriggerInteraction.Ignore) && hit.collider.CompareTag("building"))
+            return Mathf.Clamp01(hit.distance / rayLength);
+
+        return 1f;
     }
 
     void Start()
@@ -130,7 +231,7 @@ public class DroneMove : Agent
         else if (discreteActions[2] == 2)
             verticalInput = -movementForce;
 
-            
+        AddReward(timePenalty);
     }
 
     private void FixedUpdate()
@@ -143,6 +244,28 @@ public class DroneMove : Agent
         MoveDrone(movementInput);
         StabilizeHorizontalDrift();
         AutoLevel(movementInput);
+        CheckFinishLineHold();
+    }
+
+    private void CheckFinishLineHold()
+    {
+        if (!reachedFinishLine)
+            return;
+
+        if (rb.linearVelocity.magnitude > finishHoldSpeed)
+        {
+            finishHoldTimer = 0;
+            return;
+        }
+
+        finishHoldTimer++;
+        AddReward(finishHoldReward);
+
+        if (finishHoldTimer < finishHoldSteps)
+            return;
+
+        AddReward(finishLineReward);
+        EndEpisode();
     }
 
     void Update()
