@@ -21,6 +21,11 @@ public class DroneMove : Agent
     [SerializeField] private float progressRewardScale = 0.1f;
     [SerializeField] private float timePenalty = -0.001f;
 
+    [Header("Obstacle Sensor")]
+    [SerializeField] private float obstacleRayLength = 100f;
+    [SerializeField] private float obstacleSphereRadius = 0.8f;
+    [SerializeField] private float obstacleVerticalAngle = 30f;
+
     public Transform[] propellers;            
     public float propellerSpeed = 500f;      
     private Rigidbody rb;
@@ -156,33 +161,100 @@ public class DroneMove : Agent
     }
     public override void CollectObservations(VectorSensor sensor)
     {
-        Vector3 localVelocity = transform.InverseTransformDirection(rb.linearVelocity);
-        sensor.AddObservation(Mathf.Clamp(localVelocity.x / movementForce, -1f, 1f));
-        sensor.AddObservation(Mathf.Clamp(localVelocity.y / movementForce, -1f, 1f));
-        sensor.AddObservation(Mathf.Clamp(localVelocity.z / movementForce, -1f, 1f));
+    Vector3 localVelocity = transform.InverseTransformDirection(rb.linearVelocity);
 
-        Vector3 localAngularVelocity = transform.InverseTransformDirection(rb.angularVelocity);
-        sensor.AddObservation(Mathf.Clamp(localAngularVelocity.x / 10f, -1f, 1f));
-        sensor.AddObservation(Mathf.Clamp(localAngularVelocity.y / 10f, -1f, 1f));
-        sensor.AddObservation(Mathf.Clamp(localAngularVelocity.z / 10f, -1f, 1f));
+    sensor.AddObservation(Mathf.Clamp(localVelocity.x / movementForce, -1f, 1f));
+    sensor.AddObservation(Mathf.Clamp(localVelocity.y / movementForce, -1f, 1f));
+    sensor.AddObservation(Mathf.Clamp(localVelocity.z / movementForce, -1f, 1f));
 
-        sensor.AddObservation(transform.up.x);
-        sensor.AddObservation(transform.up.z);
+    Vector3 localAngularVelocity =
+        transform.InverseTransformDirection(rb.angularVelocity);
 
-        RaycastHit finishHit;
-        Vector3 finishDirection = FindClosestTaggedRay("finishline", out finishHit);
-        
-        Vector3 localFinishDirection = transform.InverseTransformDirection(finishDirection);
-        sensor.AddObservation(localFinishDirection.x);
-        sensor.AddObservation(localFinishDirection.z);
-        sensor.AddObservation(finishHit.collider == null ? 1f : finishHit.distance / rayLength);
-    
+    sensor.AddObservation(Mathf.Clamp(localAngularVelocity.x / 10f, -1f, 1f));
+    sensor.AddObservation(Mathf.Clamp(localAngularVelocity.y / 10f, -1f, 1f));
+    sensor.AddObservation(Mathf.Clamp(localAngularVelocity.z / 10f, -1f, 1f));
 
-        sensor.AddObservation(BuildingRayDistance(transform.forward));
-        sensor.AddObservation(BuildingRayDistance(transform.right));
-        sensor.AddObservation(GroundRayDistance(Vector3.down));
-        sensor.AddObservation(GroundRayDistance(Vector3.up));
+    sensor.AddObservation(transform.up.x);
+    sensor.AddObservation(transform.up.z);
+
+    RaycastHit finishHit;
+    Vector3 finishDirection =
+        FindClosestTaggedRay("finishline", out finishHit);
+
+    Vector3 localFinishDirection =
+        transform.InverseTransformDirection(finishDirection);
+
+    sensor.AddObservation(localFinishDirection.x);
+    sensor.AddObservation(localFinishDirection.z);
+    sensor.AddObservation(
+        finishHit.collider == null ? 1f : finishHit.distance / rayLength
+    );
+
+    AddObstacleObservations(sensor);
     }
+
+    private void AddObstacleObservations(VectorSensor sensor)
+{
+    // 8 horisontella riktningar
+    for (int i = 0; i < 8; i++)
+    {
+        float angle = i * 45f;
+
+        Vector3 direction =
+            Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
+
+        sensor.AddObservation(ObstacleSphereCastDistance(direction));
+    }
+
+    // 8 riktningar uppåt
+    for (int i = 0; i < 8; i++)
+    {
+        float angle = i * 45f;
+
+        Vector3 direction =
+            Quaternion.Euler(-obstacleVerticalAngle, angle, 0f)
+            * Vector3.forward;
+
+        sensor.AddObservation(ObstacleSphereCastDistance(direction));
+    }
+
+    // 8 riktningar nedåt
+    for (int i = 0; i < 8; i++)
+    {
+        float angle = i * 45f;
+
+        Vector3 direction =
+            Quaternion.Euler(obstacleVerticalAngle, angle, 0f)
+            * Vector3.forward;
+
+        sensor.AddObservation(ObstacleSphereCastDistance(direction));
+    }
+}
+
+private float ObstacleSphereCastDistance(Vector3 localDirection)
+{
+    Vector3 worldDirection =
+        transform.TransformDirection(localDirection).normalized;
+
+    if (Physics.SphereCast(
+        transform.position,
+        obstacleSphereRadius,
+        worldDirection,
+        out RaycastHit hit,
+        obstacleRayLength,
+        rayMask,
+        QueryTriggerInteraction.Ignore))
+    {
+        if (IsTaggedAsBuilding(hit.collider))
+        {
+            return Mathf.Clamp01(hit.distance / obstacleRayLength);
+        }
+    }
+
+    return 1f;
+}
+
+
 
     private float GroundRayDistance(Vector3 direction)
     {

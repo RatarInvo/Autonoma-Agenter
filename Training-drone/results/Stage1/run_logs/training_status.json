@@ -2,40 +2,22 @@
     "My Behavior": {
         "checkpoints": [
             {
-                "steps": 499986,
-                "file_path": "results\\Stage1\\My Behavior\\My Behavior-499986.onnx",
-                "reward": 5.298401870727539,
-                "creation_time": 1790253270.344778,
+                "steps": 164060,
+                "file_path": "results\\Stage1\\My Behavior\\My Behavior-164060.onnx",
+                "reward": -1.155191671103239,
+                "creation_time": 1790600805.2681284,
                 "auxillary_file_paths": [
-                    "results\\Stage1\\My Behavior\\My Behavior-499986.pt"
-                ]
-            },
-            {
-                "steps": 509499,
-                "file_path": "results\\Stage1\\My Behavior\\My Behavior-509499.onnx",
-                "reward": 5.297960762544112,
-                "creation_time": 1790253280.4750884,
-                "auxillary_file_paths": [
-                    "results\\Stage1\\My Behavior\\My Behavior-509499.pt"
-                ]
-            },
-            {
-                "steps": 533353,
-                "file_path": "results\\Stage1\\My Behavior\\My Behavior-533353.onnx",
-                "reward": -1.026072019636631,
-                "creation_time": 1790253757.2797298,
-                "auxillary_file_paths": [
-                    "results\\Stage1\\My Behavior\\My Behavior-533353.pt"
+                    "results\\Stage1\\My Behavior\\My Behavior-164060.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 533353,
+            "steps": 164060,
             "file_path": "results\\Stage1\\My Behavior.onnx",
-            "reward": -1.026072019636631,
-            "creation_time": 1790253757.2797298,
+            "reward": -1.155191671103239,
+            "creation_time": 1790600805.2681284,
             "auxillary_file_paths": [
-                "results\\Stage1\\My Behavior\\My Behavior-533353.pt"
+                "results\\Stage1\\My Behavior\\My Behavior-164060.pt"
             ]
         }
     },
