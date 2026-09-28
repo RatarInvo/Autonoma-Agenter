@@ -79,7 +79,7 @@ engine_settings:
   no_graphics: true
 
 checkpoint_settings:
-  run_id: DronePPO
+  run_id: My Behavior
   resume: false
   force: false
   inference: false

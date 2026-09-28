@@ -348,7 +348,7 @@ public class TrainingArea : MonoBehaviour
         DroneSpawnRotation =
             transform.rotation *
             Quaternion.Euler(0.0f, Random.Range(0.0f, 360.0f), 0.0f);
-
+    
         Reserve(droneLocalPoint, droneRadius);
     }
 

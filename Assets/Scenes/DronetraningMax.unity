@@ -1787,7 +1787,7 @@ PrefabInstance:
       objectReference: {fileID: 1688947253}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: level
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: areaSize
@@ -2761,6 +2761,7 @@ GameObject:
   - component: {fileID: 78527164}
   - component: {fileID: 78527163}
   - component: {fileID: 78527162}
+  - component: {fileID: 78527168}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -2825,10 +2826,10 @@ MonoBehaviour:
   m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 4294967295
   m_ObservationStacks: 1
   m_AlternatingRayOrder: 1
-  m_UseBatchedRaycasts: 0
+  m_UseBatchedRaycasts: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
@@ -2846,7 +2847,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 15
+    VectorObservationSize: 13
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -2912,7 +2913,7 @@ MonoBehaviour:
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
-  propellerSpeed: 1000
+  propellerSpeed: 500
 --- !u!65 &78527166
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2961,6 +2962,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 32
   m_CollisionDetection: 0
+--- !u!114 &78527168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78527160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.DecisionRequester
+  DecisionPeriod: 2
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &80384946
 GameObject:
   m_ObjectHideFlags: 0
@@ -3795,6 +3811,7 @@ GameObject:
   - component: {fileID: 91331748}
   - component: {fileID: 91331747}
   - component: {fileID: 91331746}
+  - component: {fileID: 91331752}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -3859,10 +3876,10 @@ MonoBehaviour:
   m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 4294967295
   m_ObservationStacks: 1
   m_AlternatingRayOrder: 1
-  m_UseBatchedRaycasts: 0
+  m_UseBatchedRaycasts: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
@@ -3880,7 +3897,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 15
+    VectorObservationSize: 13
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -3946,7 +3963,7 @@ MonoBehaviour:
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
-  propellerSpeed: 1000
+  propellerSpeed: 500
 --- !u!65 &91331750
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3995,6 +4012,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 32
   m_CollisionDetection: 0
+--- !u!114 &91331752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 91331744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.DecisionRequester
+  DecisionPeriod: 2
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &91450027
 GameObject:
   m_ObjectHideFlags: 0
@@ -6398,7 +6430,7 @@ PrefabInstance:
       objectReference: {fileID: 1347230527}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: level
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: areaSize
@@ -9666,7 +9698,7 @@ PrefabInstance:
       objectReference: {fileID: 1323273984}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: level
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: areaSize
@@ -12023,7 +12055,7 @@ PrefabInstance:
       objectReference: {fileID: 1359094941}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: level
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: areaSize
@@ -13456,7 +13488,7 @@ PrefabInstance:
       objectReference: {fileID: 676357792}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: level
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: areaSize
@@ -15222,7 +15254,7 @@ PrefabInstance:
       objectReference: {fileID: 1045251036}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: level
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: areaSize
@@ -16413,6 +16445,7 @@ GameObject:
   - component: {fileID: 360900932}
   - component: {fileID: 360900931}
   - component: {fileID: 360900930}
+  - component: {fileID: 360900936}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -16477,10 +16510,10 @@ MonoBehaviour:
   m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 4294967295
   m_ObservationStacks: 1
   m_AlternatingRayOrder: 1
-  m_UseBatchedRaycasts: 0
+  m_UseBatchedRaycasts: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
@@ -16498,7 +16531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 15
+    VectorObservationSize: 13
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -16564,7 +16597,7 @@ MonoBehaviour:
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
-  propellerSpeed: 1000
+  propellerSpeed: 500
 --- !u!65 &360900934
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16613,6 +16646,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 32
   m_CollisionDetection: 0
+--- !u!114 &360900936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360900928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.DecisionRequester
+  DecisionPeriod: 2
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &361260116
 GameObject:
   m_ObjectHideFlags: 0
@@ -22610,7 +22658,7 @@ PrefabInstance:
       objectReference: {fileID: 1731791612}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: level
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: areaSize
@@ -26987,6 +27035,7 @@ GameObject:
   - component: {fileID: 604072809}
   - component: {fileID: 604072808}
   - component: {fileID: 604072807}
+  - component: {fileID: 604072813}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -27051,10 +27100,10 @@ MonoBehaviour:
   m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 4294967295
   m_ObservationStacks: 1
   m_AlternatingRayOrder: 1
-  m_UseBatchedRaycasts: 0
+  m_UseBatchedRaycasts: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
@@ -27072,7 +27121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 15
+    VectorObservationSize: 13
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -27138,7 +27187,7 @@ MonoBehaviour:
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
-  propellerSpeed: 1000
+  propellerSpeed: 500
 --- !u!65 &604072811
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27187,6 +27236,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 32
   m_CollisionDetection: 0
+--- !u!114 &604072813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604072805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.DecisionRequester
+  DecisionPeriod: 2
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &605426751
 GameObject:
   m_ObjectHideFlags: 0
@@ -27237,6 +27301,7 @@ GameObject:
   - component: {fileID: 605560025}
   - component: {fileID: 605560024}
   - component: {fileID: 605560023}
+  - component: {fileID: 605560029}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -27301,10 +27366,10 @@ MonoBehaviour:
   m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 4294967295
   m_ObservationStacks: 1
   m_AlternatingRayOrder: 1
-  m_UseBatchedRaycasts: 0
+  m_UseBatchedRaycasts: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
@@ -27322,7 +27387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 15
+    VectorObservationSize: 13
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -27388,7 +27453,7 @@ MonoBehaviour:
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
-  propellerSpeed: 1000
+  propellerSpeed: 500
 --- !u!65 &605560027
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27437,6 +27502,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 32
   m_CollisionDetection: 0
+--- !u!114 &605560029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605560021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.DecisionRequester
+  DecisionPeriod: 2
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &607697898
 GameObject:
   m_ObjectHideFlags: 0
@@ -30611,6 +30691,7 @@ GameObject:
   - component: {fileID: 676357791}
   - component: {fileID: 676357790}
   - component: {fileID: 676357789}
+  - component: {fileID: 676357795}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -30675,10 +30756,10 @@ MonoBehaviour:
   m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 4294967295
   m_ObservationStacks: 1
   m_AlternatingRayOrder: 1
-  m_UseBatchedRaycasts: 0
+  m_UseBatchedRaycasts: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
@@ -30696,7 +30777,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 15
+    VectorObservationSize: 13
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -30762,7 +30843,7 @@ MonoBehaviour:
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
-  propellerSpeed: 1000
+  propellerSpeed: 500
 --- !u!65 &676357793
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30811,6 +30892,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 32
   m_CollisionDetection: 0
+--- !u!114 &676357795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 676357787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.DecisionRequester
+  DecisionPeriod: 2
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &677133367
 GameObject:
   m_ObjectHideFlags: 0
@@ -32110,7 +32206,7 @@ PrefabInstance:
       objectReference: {fileID: 1401756894}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: level
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: areaSize
@@ -32846,7 +32942,7 @@ PrefabInstance:
       objectReference: {fileID: 1922736068}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: level
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: areaSize
@@ -33596,7 +33692,7 @@ PrefabInstance:
       objectReference: {fileID: 1490801526}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: level
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: areaSize
@@ -34350,7 +34446,7 @@ PrefabInstance:
       objectReference: {fileID: 605560026}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: level
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: areaSize
@@ -34791,6 +34887,7 @@ GameObject:
   - component: {fileID: 768438676}
   - component: {fileID: 768438675}
   - component: {fileID: 768438674}
+  - component: {fileID: 768438680}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -34855,10 +34952,10 @@ MonoBehaviour:
   m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 4294967295
   m_ObservationStacks: 1
   m_AlternatingRayOrder: 1
-  m_UseBatchedRaycasts: 0
+  m_UseBatchedRaycasts: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
@@ -34876,7 +34973,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 15
+    VectorObservationSize: 13
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -34942,7 +35039,7 @@ MonoBehaviour:
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
-  propellerSpeed: 1000
+  propellerSpeed: 500
 --- !u!65 &768438678
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -34991,6 +35088,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 32
   m_CollisionDetection: 0
+--- !u!114 &768438680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 768438672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.DecisionRequester
+  DecisionPeriod: 2
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &768985800
 GameObject:
   m_ObjectHideFlags: 0
@@ -37053,7 +37165,7 @@ PrefabInstance:
       objectReference: {fileID: 869998244}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: level
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: areaSize
@@ -39250,6 +39362,7 @@ GameObject:
   - component: {fileID: 849073956}
   - component: {fileID: 849073955}
   - component: {fileID: 849073954}
+  - component: {fileID: 849073960}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -39314,10 +39427,10 @@ MonoBehaviour:
   m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 4294967295
   m_ObservationStacks: 1
   m_AlternatingRayOrder: 1
-  m_UseBatchedRaycasts: 0
+  m_UseBatchedRaycasts: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
@@ -39335,7 +39448,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 15
+    VectorObservationSize: 13
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -39401,7 +39514,7 @@ MonoBehaviour:
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
-  propellerSpeed: 1000
+  propellerSpeed: 500
 --- !u!65 &849073958
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -39450,6 +39563,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 32
   m_CollisionDetection: 0
+--- !u!114 &849073960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 849073952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.DecisionRequester
+  DecisionPeriod: 2
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &853168282
 GameObject:
   m_ObjectHideFlags: 0
@@ -40914,6 +41042,7 @@ GameObject:
   - component: {fileID: 869998243}
   - component: {fileID: 869998242}
   - component: {fileID: 869998241}
+  - component: {fileID: 869998247}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -40978,10 +41107,10 @@ MonoBehaviour:
   m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 4294967295
   m_ObservationStacks: 1
   m_AlternatingRayOrder: 1
-  m_UseBatchedRaycasts: 0
+  m_UseBatchedRaycasts: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
@@ -40999,7 +41128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 15
+    VectorObservationSize: 13
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -41065,7 +41194,7 @@ MonoBehaviour:
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
-  propellerSpeed: 1000
+  propellerSpeed: 500
 --- !u!65 &869998245
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -41114,6 +41243,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 32
   m_CollisionDetection: 0
+--- !u!114 &869998247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869998239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.DecisionRequester
+  DecisionPeriod: 2
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &870755236
 GameObject:
   m_ObjectHideFlags: 0
@@ -43278,7 +43422,7 @@ PrefabInstance:
       objectReference: {fileID: 768438677}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: level
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: areaSize
@@ -43818,7 +43962,7 @@ PrefabInstance:
       objectReference: {fileID: 360900933}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: level
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: areaSize
@@ -44114,7 +44258,7 @@ PrefabInstance:
       objectReference: {fileID: 1631537229}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: level
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: areaSize
@@ -46375,7 +46519,7 @@ PrefabInstance:
       objectReference: {fileID: 78527165}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: level
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: areaSize
@@ -47836,6 +47980,7 @@ GameObject:
   - component: {fileID: 1045251035}
   - component: {fileID: 1045251034}
   - component: {fileID: 1045251033}
+  - component: {fileID: 1045251039}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -47900,10 +48045,10 @@ MonoBehaviour:
   m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 4294967295
   m_ObservationStacks: 1
   m_AlternatingRayOrder: 1
-  m_UseBatchedRaycasts: 0
+  m_UseBatchedRaycasts: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
@@ -47921,7 +48066,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 15
+    VectorObservationSize: 13
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -47987,7 +48132,7 @@ MonoBehaviour:
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
-  propellerSpeed: 1000
+  propellerSpeed: 500
 --- !u!65 &1045251037
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -48036,6 +48181,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 32
   m_CollisionDetection: 0
+--- !u!114 &1045251039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1045251031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.DecisionRequester
+  DecisionPeriod: 2
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &1050406113
 GameObject:
   m_ObjectHideFlags: 0
@@ -49690,7 +49850,7 @@ PrefabInstance:
       objectReference: {fileID: 604072810}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: level
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: areaSize
@@ -54571,7 +54731,7 @@ PrefabInstance:
       objectReference: {fileID: 1712066882}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: level
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: areaSize
@@ -58289,6 +58449,7 @@ GameObject:
   - component: {fileID: 1264088610}
   - component: {fileID: 1264088609}
   - component: {fileID: 1264088608}
+  - component: {fileID: 1264088614}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -58353,10 +58514,10 @@ MonoBehaviour:
   m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 4294967295
   m_ObservationStacks: 1
   m_AlternatingRayOrder: 1
-  m_UseBatchedRaycasts: 0
+  m_UseBatchedRaycasts: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
@@ -58374,7 +58535,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 15
+    VectorObservationSize: 13
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -58440,7 +58601,7 @@ MonoBehaviour:
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
-  propellerSpeed: 1000
+  propellerSpeed: 500
 --- !u!65 &1264088612
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -58489,6 +58650,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 32
   m_CollisionDetection: 0
+--- !u!114 &1264088614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264088606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.DecisionRequester
+  DecisionPeriod: 2
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &1264538370
 GameObject:
   m_ObjectHideFlags: 0
@@ -60598,7 +60774,7 @@ PrefabInstance:
       objectReference: {fileID: 91331749}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: level
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: areaSize
@@ -61266,6 +61442,7 @@ GameObject:
   - component: {fileID: 1323273983}
   - component: {fileID: 1323273982}
   - component: {fileID: 1323273981}
+  - component: {fileID: 1323273987}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -61330,10 +61507,10 @@ MonoBehaviour:
   m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 4294967295
   m_ObservationStacks: 1
   m_AlternatingRayOrder: 1
-  m_UseBatchedRaycasts: 0
+  m_UseBatchedRaycasts: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
@@ -61351,7 +61528,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 15
+    VectorObservationSize: 13
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -61417,7 +61594,7 @@ MonoBehaviour:
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
-  propellerSpeed: 1000
+  propellerSpeed: 500
 --- !u!65 &1323273985
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -61466,6 +61643,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 32
   m_CollisionDetection: 0
+--- !u!114 &1323273987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1323273979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.DecisionRequester
+  DecisionPeriod: 2
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &1325397849
 GameObject:
   m_ObjectHideFlags: 0
@@ -62374,6 +62566,7 @@ GameObject:
   - component: {fileID: 1347230526}
   - component: {fileID: 1347230525}
   - component: {fileID: 1347230524}
+  - component: {fileID: 1347230530}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -62438,10 +62631,10 @@ MonoBehaviour:
   m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 4294967295
   m_ObservationStacks: 1
   m_AlternatingRayOrder: 1
-  m_UseBatchedRaycasts: 0
+  m_UseBatchedRaycasts: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
@@ -62459,7 +62652,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 15
+    VectorObservationSize: 13
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -62525,7 +62718,7 @@ MonoBehaviour:
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
-  propellerSpeed: 1000
+  propellerSpeed: 500
 --- !u!65 &1347230528
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -62574,6 +62767,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 32
   m_CollisionDetection: 0
+--- !u!114 &1347230530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347230522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.DecisionRequester
+  DecisionPeriod: 2
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &1347266651
 GameObject:
   m_ObjectHideFlags: 0
@@ -63014,6 +63222,7 @@ GameObject:
   - component: {fileID: 1359094940}
   - component: {fileID: 1359094939}
   - component: {fileID: 1359094938}
+  - component: {fileID: 1359094944}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -63078,10 +63287,10 @@ MonoBehaviour:
   m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 4294967295
   m_ObservationStacks: 1
   m_AlternatingRayOrder: 1
-  m_UseBatchedRaycasts: 0
+  m_UseBatchedRaycasts: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
@@ -63099,7 +63308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 15
+    VectorObservationSize: 13
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -63165,7 +63374,7 @@ MonoBehaviour:
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
-  propellerSpeed: 1000
+  propellerSpeed: 500
 --- !u!65 &1359094942
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -63214,6 +63423,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 32
   m_CollisionDetection: 0
+--- !u!114 &1359094944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359094936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.DecisionRequester
+  DecisionPeriod: 2
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &1360766156
 GameObject:
   m_ObjectHideFlags: 0
@@ -63260,7 +63484,7 @@ PrefabInstance:
       objectReference: {fileID: 1264088611}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: level
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: areaSize
@@ -64450,6 +64674,7 @@ GameObject:
   - component: {fileID: 1401756893}
   - component: {fileID: 1401756892}
   - component: {fileID: 1401756891}
+  - component: {fileID: 1401756897}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -64514,10 +64739,10 @@ MonoBehaviour:
   m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 4294967295
   m_ObservationStacks: 1
   m_AlternatingRayOrder: 1
-  m_UseBatchedRaycasts: 0
+  m_UseBatchedRaycasts: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
@@ -64535,7 +64760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 15
+    VectorObservationSize: 13
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -64601,7 +64826,7 @@ MonoBehaviour:
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
-  propellerSpeed: 1000
+  propellerSpeed: 500
 --- !u!65 &1401756895
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -64650,6 +64875,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 32
   m_CollisionDetection: 0
+--- !u!114 &1401756897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401756889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.DecisionRequester
+  DecisionPeriod: 2
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &1404625032
 GameObject:
   m_ObjectHideFlags: 0
@@ -66877,7 +67117,7 @@ PrefabInstance:
       objectReference: {fileID: 849073957}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: level
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: areaSize
@@ -68388,6 +68628,7 @@ GameObject:
   - component: {fileID: 1490801525}
   - component: {fileID: 1490801524}
   - component: {fileID: 1490801523}
+  - component: {fileID: 1490801529}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -68452,10 +68693,10 @@ MonoBehaviour:
   m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 4294967295
   m_ObservationStacks: 1
   m_AlternatingRayOrder: 1
-  m_UseBatchedRaycasts: 0
+  m_UseBatchedRaycasts: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
@@ -68473,7 +68714,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 15
+    VectorObservationSize: 13
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -68539,7 +68780,7 @@ MonoBehaviour:
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
-  propellerSpeed: 1000
+  propellerSpeed: 500
 --- !u!65 &1490801527
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -68588,6 +68829,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 32
   m_CollisionDetection: 0
+--- !u!114 &1490801529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490801521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.DecisionRequester
+  DecisionPeriod: 2
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &1491147455
 GameObject:
   m_ObjectHideFlags: 0
@@ -70191,7 +70447,7 @@ PrefabInstance:
       objectReference: {fileID: 2010587761}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: level
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: areaSize
@@ -75859,6 +76115,7 @@ GameObject:
   - component: {fileID: 1631537228}
   - component: {fileID: 1631537227}
   - component: {fileID: 1631537226}
+  - component: {fileID: 1631537232}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -75923,10 +76180,10 @@ MonoBehaviour:
   m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 4294967295
   m_ObservationStacks: 1
   m_AlternatingRayOrder: 1
-  m_UseBatchedRaycasts: 0
+  m_UseBatchedRaycasts: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
@@ -75944,7 +76201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 15
+    VectorObservationSize: 13
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -76010,7 +76267,7 @@ MonoBehaviour:
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
-  propellerSpeed: 1000
+  propellerSpeed: 500
 --- !u!65 &1631537230
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -76059,6 +76316,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 32
   m_CollisionDetection: 0
+--- !u!114 &1631537232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1631537224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.DecisionRequester
+  DecisionPeriod: 2
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &1635447824
 GameObject:
   m_ObjectHideFlags: 0
@@ -78124,6 +78396,7 @@ GameObject:
   - component: {fileID: 1688947252}
   - component: {fileID: 1688947251}
   - component: {fileID: 1688947250}
+  - component: {fileID: 1688947256}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -78188,10 +78461,10 @@ MonoBehaviour:
   m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 4294967295
   m_ObservationStacks: 1
   m_AlternatingRayOrder: 1
-  m_UseBatchedRaycasts: 0
+  m_UseBatchedRaycasts: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
@@ -78209,7 +78482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 15
+    VectorObservationSize: 13
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -78275,7 +78548,7 @@ MonoBehaviour:
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
-  propellerSpeed: 1000
+  propellerSpeed: 500
 --- !u!65 &1688947254
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -78324,6 +78597,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 32
   m_CollisionDetection: 0
+--- !u!114 &1688947256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1688947248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.DecisionRequester
+  DecisionPeriod: 2
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &1689707544
 GameObject:
   m_ObjectHideFlags: 0
@@ -79492,6 +79780,7 @@ GameObject:
   - component: {fileID: 1712066881}
   - component: {fileID: 1712066880}
   - component: {fileID: 1712066879}
+  - component: {fileID: 1712066885}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -79556,10 +79845,10 @@ MonoBehaviour:
   m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 4294967295
   m_ObservationStacks: 1
   m_AlternatingRayOrder: 1
-  m_UseBatchedRaycasts: 0
+  m_UseBatchedRaycasts: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
@@ -79577,7 +79866,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 15
+    VectorObservationSize: 13
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -79643,7 +79932,7 @@ MonoBehaviour:
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
-  propellerSpeed: 1000
+  propellerSpeed: 500
 --- !u!65 &1712066883
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -79692,6 +79981,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 32
   m_CollisionDetection: 0
+--- !u!114 &1712066885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1712066877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.DecisionRequester
+  DecisionPeriod: 2
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &1712221666
 GameObject:
   m_ObjectHideFlags: 0
@@ -80548,6 +80852,7 @@ GameObject:
   - component: {fileID: 1731791611}
   - component: {fileID: 1731791610}
   - component: {fileID: 1731791609}
+  - component: {fileID: 1731791615}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -80612,10 +80917,10 @@ MonoBehaviour:
   m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 4294967295
   m_ObservationStacks: 1
   m_AlternatingRayOrder: 1
-  m_UseBatchedRaycasts: 0
+  m_UseBatchedRaycasts: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
@@ -80633,7 +80938,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 15
+    VectorObservationSize: 13
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -80699,7 +81004,7 @@ MonoBehaviour:
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
-  propellerSpeed: 1000
+  propellerSpeed: 500
 --- !u!65 &1731791613
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -80748,6 +81053,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 32
   m_CollisionDetection: 0
+--- !u!114 &1731791615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731791607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.DecisionRequester
+  DecisionPeriod: 2
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &1734289768
 GameObject:
   m_ObjectHideFlags: 0
@@ -87128,6 +87448,7 @@ GameObject:
   - component: {fileID: 1897152149}
   - component: {fileID: 1897152148}
   - component: {fileID: 1897152147}
+  - component: {fileID: 1897152153}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -87192,10 +87513,10 @@ MonoBehaviour:
   m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 4294967295
   m_ObservationStacks: 1
   m_AlternatingRayOrder: 1
-  m_UseBatchedRaycasts: 0
+  m_UseBatchedRaycasts: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
@@ -87213,7 +87534,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 15
+    VectorObservationSize: 13
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -87279,7 +87600,7 @@ MonoBehaviour:
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
-  propellerSpeed: 1000
+  propellerSpeed: 500
 --- !u!65 &1897152151
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -87328,6 +87649,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 32
   m_CollisionDetection: 0
+--- !u!114 &1897152153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897152145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.DecisionRequester
+  DecisionPeriod: 2
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &1899139721
 GameObject:
   m_ObjectHideFlags: 0
@@ -87497,6 +87833,7 @@ GameObject:
   - component: {fileID: 1903196447}
   - component: {fileID: 1903196446}
   - component: {fileID: 1903196445}
+  - component: {fileID: 1903196451}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -87561,10 +87898,10 @@ MonoBehaviour:
   m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 4294967295
   m_ObservationStacks: 1
   m_AlternatingRayOrder: 1
-  m_UseBatchedRaycasts: 0
+  m_UseBatchedRaycasts: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
@@ -87582,7 +87919,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 15
+    VectorObservationSize: 13
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -87648,7 +87985,7 @@ MonoBehaviour:
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
-  propellerSpeed: 1000
+  propellerSpeed: 500
 --- !u!65 &1903196449
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -87697,6 +88034,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 32
   m_CollisionDetection: 0
+--- !u!114 &1903196451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903196443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.DecisionRequester
+  DecisionPeriod: 2
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &1903579814
 GameObject:
   m_ObjectHideFlags: 0
@@ -88986,6 +89338,7 @@ GameObject:
   - component: {fileID: 1922736067}
   - component: {fileID: 1922736066}
   - component: {fileID: 1922736065}
+  - component: {fileID: 1922736071}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -89050,10 +89403,10 @@ MonoBehaviour:
   m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 4294967295
   m_ObservationStacks: 1
   m_AlternatingRayOrder: 1
-  m_UseBatchedRaycasts: 0
+  m_UseBatchedRaycasts: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
@@ -89071,7 +89424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 15
+    VectorObservationSize: 13
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -89137,7 +89490,7 @@ MonoBehaviour:
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
-  propellerSpeed: 1000
+  propellerSpeed: 500
 --- !u!65 &1922736069
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -89186,6 +89539,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 32
   m_CollisionDetection: 0
+--- !u!114 &1922736071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922736063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.DecisionRequester
+  DecisionPeriod: 2
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &1923315939
 GameObject:
   m_ObjectHideFlags: 0
@@ -92560,6 +92928,7 @@ GameObject:
   - component: {fileID: 2010587760}
   - component: {fileID: 2010587759}
   - component: {fileID: 2010587758}
+  - component: {fileID: 2010587764}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -92624,10 +92993,10 @@ MonoBehaviour:
   m_RayLength: 100
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 4294967295
   m_ObservationStacks: 1
   m_AlternatingRayOrder: 1
-  m_UseBatchedRaycasts: 0
+  m_UseBatchedRaycasts: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
@@ -92645,7 +93014,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 15
+    VectorObservationSize: 13
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -92711,7 +93080,7 @@ MonoBehaviour:
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
-  propellerSpeed: 1000
+  propellerSpeed: 500
 --- !u!65 &2010587762
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -92760,6 +93129,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 32
   m_CollisionDetection: 0
+--- !u!114 &2010587764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010587756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.DecisionRequester
+  DecisionPeriod: 2
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &2019739649
 GameObject:
   m_ObjectHideFlags: 0
@@ -95756,7 +96140,7 @@ PrefabInstance:
       objectReference: {fileID: 1897152150}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: level
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: areaSize
@@ -96758,7 +97142,7 @@ PrefabInstance:
       objectReference: {fileID: 1903196448}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: level
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 153889487602571443, guid: 841df5c60e8115a43ab27d4b433f71b2, type: 3}
       propertyPath: areaSize
