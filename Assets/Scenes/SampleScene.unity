@@ -4081,8 +4081,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3357641206802454497}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 451.19, y: 11.8, z: 297}
+  m_LocalRotation: {x: -0, y: 0.8712587, z: -0, w: 0.49082428}
+  m_LocalPosition: {x: 201.7, y: 11.8, z: 251}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4107,7 +4107,7 @@ Transform:
   - {fileID: 3357641206802353125}
   - {fileID: 3357641206802353127}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 121.21, z: 0}
 --- !u!4 &3357641206802353091
 Transform:
   m_ObjectHideFlags: 0
@@ -5302,16 +5302,15 @@ MonoBehaviour:
   tiltSpeed: 5
   verticalDamping: 5
   horizontalDamping: 1
-  propellers: []
-  propellerSpeed: 1000
-  requestDecisionsInCode: 1
-  finishPoint: {fileID: 0}
-  finishLineReward: 2
-  finishRadius: 3
-  finishSpeed: 0.75
-  finishHoldTime: 2
+  rayLength: 40
+  rayMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  finishReward: 1
   progressRewardScale: 0.02
   timePenalty: -0.0005
+  propellers: []
+  propellerSpeed: 1000
 --- !u!114 &3357641206802454503
 MonoBehaviour:
   m_ObjectHideFlags: 0

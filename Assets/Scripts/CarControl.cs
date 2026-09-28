@@ -95,8 +95,8 @@ public class CarControl : Agent
         {
             area.ResetArea();
 
-            spawnPosition = area.RoverSpawnPosition;
-            spawnRotation = area.RoverSpawnRotation;
+            //spawnPosition = area.RoverSpawnPosition;
+            //spawnRotation = area.RoverSpawnRotation;
         }
 
         transform.SetPositionAndRotation(spawnPosition, spawnRotation);

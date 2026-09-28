@@ -15,7 +15,7 @@ public class DroneMove : Agent
     public float horizontalDamping = 1f;
 
     [Header("Finish Line")]
-    [SerializeField] private float rayLength = 40f;
+    [SerializeField] private float rayLength = 100f;
     [SerializeField] private LayerMask rayMask = ~0;
     [SerializeField] private float finishReward = 1f;
     [SerializeField] private float progressRewardScale = 0.1f;
@@ -31,6 +31,7 @@ public class DroneMove : Agent
     private Vector2 movementInput;
     private bool episodeEnding;
     private float previousFinishDistance;
+    private TrainingArea area;
 
     protected override void Awake()
     {
@@ -39,18 +40,43 @@ public class DroneMove : Agent
         startingRotation = transform.rotation;
         targetRotation = startingRotation;
         MaxStep = 4000;
+        area = GetComponentInParent<TrainingArea>();
     }
 
     public override void OnEpisodeBegin()
     {
         episodeEnding = false;
         Reset();
+        ResetState();
         previousFinishDistance = FinishDistance();
+
+        Vector3 spawnPosition = startingPosition;
+        Quaternion spawnRotation = startingRotation;
+
+        if (area != null)
+        {
+            area.ResetArea();
+
+            spawnPosition = area.DroneSpawnPosition;
+            spawnRotation = area.DroneSpawnRotation;
+        }
     }
 
     public void Reset()
     {
         transform.SetPositionAndRotation(startingPosition, startingRotation);
+        ResetState();
+    }
+
+        public void ResetToSpawn(Vector3 spawnPosition, Quaternion spawnRotation)
+    {
+        transform.SetPositionAndRotation(spawnPosition, spawnRotation);
+
+        ResetState();
+    }
+
+        private void ResetState()
+    {
 
         Rigidbody body = GetComponent<Rigidbody>();
         if (body != null)
@@ -61,7 +87,7 @@ public class DroneMove : Agent
         verticalInput = 0f;
         movementInput = Vector2.zero;
         targetRotation = startingRotation;
-    }
+     }
 
     private void OnCollisionEnter(Collision collision)
     {

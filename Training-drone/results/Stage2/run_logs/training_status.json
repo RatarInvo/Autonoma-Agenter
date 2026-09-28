@@ -2,49 +2,58 @@
     "My Behavior": {
         "checkpoints": [
             {
-                "steps": 499907,
-                "file_path": "results\\Stage2\\My Behavior\\My Behavior-499907.onnx",
-                "reward": -1.366399995982647,
-                "creation_time": 1790254307.1716046,
+                "steps": 499913,
+                "file_path": "results\\Stage2\\My Behavior\\My Behavior-499913.onnx",
+                "reward": -0.9941332017381986,
+                "creation_time": 1790578667.134786,
                 "auxillary_file_paths": [
-                    "results\\Stage2\\My Behavior\\My Behavior-499907.pt"
+                    "results\\Stage2\\My Behavior\\My Behavior-499913.pt"
                 ]
             },
             {
-                "steps": 999977,
-                "file_path": "results\\Stage2\\My Behavior\\My Behavior-999977.onnx",
-                "reward": -1.3999998830258846,
-                "creation_time": 1790254595.8871667,
+                "steps": 999982,
+                "file_path": "results\\Stage2\\My Behavior\\My Behavior-999982.onnx",
+                "reward": 0.808405926451087,
+                "creation_time": 1790578932.0133243,
                 "auxillary_file_paths": [
-                    "results\\Stage2\\My Behavior\\My Behavior-999977.pt"
+                    "results\\Stage2\\My Behavior\\My Behavior-999982.pt"
                 ]
             },
             {
-                "steps": 1499929,
-                "file_path": "results\\Stage2\\My Behavior\\My Behavior-1499929.onnx",
-                "reward": null,
-                "creation_time": 1790254888.07174,
+                "steps": 1499985,
+                "file_path": "results\\Stage2\\My Behavior\\My Behavior-1499985.onnx",
+                "reward": 0.7616810189094394,
+                "creation_time": 1790579218.6705544,
                 "auxillary_file_paths": [
-                    "results\\Stage2\\My Behavior\\My Behavior-1499929.pt"
+                    "results\\Stage2\\My Behavior\\My Behavior-1499985.pt"
                 ]
             },
             {
-                "steps": 1591712,
-                "file_path": "results\\Stage2\\My Behavior\\My Behavior-1591712.onnx",
-                "reward": null,
-                "creation_time": 1790254941.4148066,
+                "steps": 1999955,
+                "file_path": "results\\Stage2\\My Behavior\\My Behavior-1999955.onnx",
+                "reward": 1.031771244382129,
+                "creation_time": 1790579523.9061778,
                 "auxillary_file_paths": [
-                    "results\\Stage2\\My Behavior\\My Behavior-1591712.pt"
+                    "results\\Stage2\\My Behavior\\My Behavior-1999955.pt"
+                ]
+            },
+            {
+                "steps": 2381306,
+                "file_path": "results\\Stage2\\My Behavior\\My Behavior-2381306.onnx",
+                "reward": 0.9335707435874563,
+                "creation_time": 1790579774.0559886,
+                "auxillary_file_paths": [
+                    "results\\Stage2\\My Behavior\\My Behavior-2381306.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 1591712,
+            "steps": 2381306,
             "file_path": "results\\Stage2\\My Behavior.onnx",
-            "reward": null,
-            "creation_time": 1790254941.4148066,
+            "reward": 0.9335707435874563,
+            "creation_time": 1790579774.0559886,
             "auxillary_file_paths": [
-                "results\\Stage2\\My Behavior\\My Behavior-1591712.pt"
+                "results\\Stage2\\My Behavior\\My Behavior-2381306.pt"
             ]
         }
     },
