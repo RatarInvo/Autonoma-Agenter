@@ -15,7 +15,7 @@ public class DroneMove : Agent
     [SerializeField] private float horizontalDamping = 1f;
 
     [Header("Finish Line")]
-    [SerializeField] private float rayLength = 100f;
+    [SerializeField] private float rayLength = 200f;
     [SerializeField] private LayerMask rayMask = ~0;
     [SerializeField] private float finishReward = 1f;
     [SerializeField] private float progressRewardScale = 0.1f;
