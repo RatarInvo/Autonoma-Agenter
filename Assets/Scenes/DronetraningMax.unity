@@ -3409,14 +3409,14 @@ MonoBehaviour:
   tiltSpeed: 5
   verticalDamping: 5
   horizontalDamping: 1
-  rayLength: 100
+  rayLength: 200
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
   finishReward: 1
-  progressRewardScale: 0.1
-  timePenalty: -0.0002
-  obstacleRayLength: 100
+  progressRewardScale: 0.2
+  timePenalty: -0.001
+  obstacleRayLength: 200
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
@@ -4199,14 +4199,14 @@ MonoBehaviour:
   tiltSpeed: 5
   verticalDamping: 5
   horizontalDamping: 1
-  rayLength: 100
+  rayLength: 200
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
   finishReward: 1
-  progressRewardScale: 0.1
-  timePenalty: -0.0002
-  obstacleRayLength: 100
+  progressRewardScale: 0.2
+  timePenalty: -0.001
+  obstacleRayLength: 200
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
@@ -6334,14 +6334,14 @@ MonoBehaviour:
   tiltSpeed: 5
   verticalDamping: 5
   horizontalDamping: 1
-  rayLength: 100
+  rayLength: 200
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
   finishReward: 1
-  progressRewardScale: 0.1
-  timePenalty: -0.0002
-  obstacleRayLength: 100
+  progressRewardScale: 0.2
+  timePenalty: -0.001
+  obstacleRayLength: 200
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
@@ -7262,14 +7262,14 @@ MonoBehaviour:
   tiltSpeed: 5
   verticalDamping: 5
   horizontalDamping: 1
-  rayLength: 100
+  rayLength: 200
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
   finishReward: 1
-  progressRewardScale: 0.1
-  timePenalty: -0.0002
-  obstacleRayLength: 100
+  progressRewardScale: 0.2
+  timePenalty: -0.001
+  obstacleRayLength: 200
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
@@ -11359,14 +11359,14 @@ MonoBehaviour:
   tiltSpeed: 5
   verticalDamping: 5
   horizontalDamping: 1
-  rayLength: 100
+  rayLength: 200
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
   finishReward: 1
-  progressRewardScale: 0.1
-  timePenalty: -0.0002
-  obstacleRayLength: 100
+  progressRewardScale: 0.2
+  timePenalty: -0.001
+  obstacleRayLength: 200
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
@@ -18717,14 +18717,14 @@ MonoBehaviour:
   tiltSpeed: 5
   verticalDamping: 5
   horizontalDamping: 1
-  rayLength: 100
+  rayLength: 200
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
   finishReward: 1
-  progressRewardScale: 0.1
-  timePenalty: -0.0002
-  obstacleRayLength: 100
+  progressRewardScale: 0.2
+  timePenalty: -0.001
+  obstacleRayLength: 200
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
@@ -27097,14 +27097,14 @@ MonoBehaviour:
   tiltSpeed: 5
   verticalDamping: 5
   horizontalDamping: 1
-  rayLength: 100
+  rayLength: 200
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
   finishReward: 1
-  progressRewardScale: 0.1
-  timePenalty: -0.0002
-  obstacleRayLength: 100
+  progressRewardScale: 0.2
+  timePenalty: -0.001
+  obstacleRayLength: 200
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
@@ -33533,14 +33533,14 @@ MonoBehaviour:
   tiltSpeed: 5
   verticalDamping: 5
   horizontalDamping: 1
-  rayLength: 100
+  rayLength: 200
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
   finishReward: 1
-  progressRewardScale: 0.1
-  timePenalty: -0.0002
-  obstacleRayLength: 100
+  progressRewardScale: 0.2
+  timePenalty: -0.001
+  obstacleRayLength: 200
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
@@ -34177,14 +34177,14 @@ MonoBehaviour:
   tiltSpeed: 5
   verticalDamping: 5
   horizontalDamping: 1
-  rayLength: 100
+  rayLength: 200
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
   finishReward: 1
-  progressRewardScale: 0.1
-  timePenalty: -0.0002
-  obstacleRayLength: 100
+  progressRewardScale: 0.2
+  timePenalty: -0.001
+  obstacleRayLength: 200
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
@@ -35688,14 +35688,14 @@ MonoBehaviour:
   tiltSpeed: 5
   verticalDamping: 5
   horizontalDamping: 1
-  rayLength: 100
+  rayLength: 200
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
   finishReward: 1
-  progressRewardScale: 0.1
-  timePenalty: -0.0002
-  obstacleRayLength: 100
+  progressRewardScale: 0.2
+  timePenalty: -0.001
+  obstacleRayLength: 200
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
@@ -36622,14 +36622,14 @@ MonoBehaviour:
   tiltSpeed: 5
   verticalDamping: 5
   horizontalDamping: 1
-  rayLength: 100
+  rayLength: 200
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
   finishReward: 1
-  progressRewardScale: 0.1
-  timePenalty: -0.0002
-  obstacleRayLength: 100
+  progressRewardScale: 0.2
+  timePenalty: -0.001
+  obstacleRayLength: 200
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
@@ -37363,14 +37363,14 @@ MonoBehaviour:
   tiltSpeed: 5
   verticalDamping: 5
   horizontalDamping: 1
-  rayLength: 100
+  rayLength: 200
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
   finishReward: 1
-  progressRewardScale: 0.1
-  timePenalty: -0.0002
-  obstacleRayLength: 100
+  progressRewardScale: 0.2
+  timePenalty: -0.001
+  obstacleRayLength: 200
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
@@ -39618,14 +39618,14 @@ MonoBehaviour:
   tiltSpeed: 5
   verticalDamping: 5
   horizontalDamping: 1
-  rayLength: 100
+  rayLength: 200
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
   finishReward: 1
-  progressRewardScale: 0.1
-  timePenalty: -0.0002
-  obstacleRayLength: 100
+  progressRewardScale: 0.2
+  timePenalty: -0.001
+  obstacleRayLength: 200
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
@@ -49659,14 +49659,14 @@ MonoBehaviour:
   tiltSpeed: 5
   verticalDamping: 5
   horizontalDamping: 1
-  rayLength: 100
+  rayLength: 200
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
   finishReward: 1
-  progressRewardScale: 0.1
-  timePenalty: -0.0002
-  obstacleRayLength: 100
+  progressRewardScale: 0.2
+  timePenalty: -0.001
+  obstacleRayLength: 200
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
@@ -59884,14 +59884,14 @@ MonoBehaviour:
   tiltSpeed: 5
   verticalDamping: 5
   horizontalDamping: 1
-  rayLength: 100
+  rayLength: 200
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
   finishReward: 1
-  progressRewardScale: 0.1
-  timePenalty: -0.0002
-  obstacleRayLength: 100
+  progressRewardScale: 0.2
+  timePenalty: -0.001
+  obstacleRayLength: 200
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
@@ -63575,14 +63575,14 @@ MonoBehaviour:
   tiltSpeed: 5
   verticalDamping: 5
   horizontalDamping: 1
-  rayLength: 100
+  rayLength: 200
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
   finishReward: 1
-  progressRewardScale: 0.1
-  timePenalty: -0.0002
-  obstacleRayLength: 100
+  progressRewardScale: 0.2
+  timePenalty: -0.001
+  obstacleRayLength: 200
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
@@ -68017,14 +68017,14 @@ MonoBehaviour:
   tiltSpeed: 5
   verticalDamping: 5
   horizontalDamping: 1
-  rayLength: 100
+  rayLength: 200
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
   finishReward: 1
-  progressRewardScale: 0.1
-  timePenalty: -0.0002
-  obstacleRayLength: 100
+  progressRewardScale: 0.2
+  timePenalty: -0.001
+  obstacleRayLength: 200
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
@@ -68980,14 +68980,14 @@ MonoBehaviour:
   tiltSpeed: 5
   verticalDamping: 5
   horizontalDamping: 1
-  rayLength: 100
+  rayLength: 200
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
   finishReward: 1
-  progressRewardScale: 0.1
-  timePenalty: -0.0002
-  obstacleRayLength: 100
+  progressRewardScale: 0.2
+  timePenalty: -0.001
+  obstacleRayLength: 200
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
@@ -77640,14 +77640,14 @@ MonoBehaviour:
   tiltSpeed: 5
   verticalDamping: 5
   horizontalDamping: 1
-  rayLength: 100
+  rayLength: 200
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
   finishReward: 1
-  progressRewardScale: 0.1
-  timePenalty: -0.0002
-  obstacleRayLength: 100
+  progressRewardScale: 0.2
+  timePenalty: -0.001
+  obstacleRayLength: 200
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
@@ -79251,14 +79251,14 @@ MonoBehaviour:
   tiltSpeed: 5
   verticalDamping: 5
   horizontalDamping: 1
-  rayLength: 100
+  rayLength: 200
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
   finishReward: 1
-  progressRewardScale: 0.1
-  timePenalty: -0.0002
-  obstacleRayLength: 100
+  progressRewardScale: 0.2
+  timePenalty: -0.001
+  obstacleRayLength: 200
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
@@ -83621,14 +83621,14 @@ MonoBehaviour:
   tiltSpeed: 5
   verticalDamping: 5
   horizontalDamping: 1
-  rayLength: 100
+  rayLength: 200
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
   finishReward: 1
-  progressRewardScale: 0.1
-  timePenalty: -0.0002
-  obstacleRayLength: 100
+  progressRewardScale: 0.2
+  timePenalty: -0.001
+  obstacleRayLength: 200
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
@@ -88559,14 +88559,14 @@ MonoBehaviour:
   tiltSpeed: 5
   verticalDamping: 5
   horizontalDamping: 1
-  rayLength: 100
+  rayLength: 200
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
   finishReward: 1
-  progressRewardScale: 0.1
-  timePenalty: -0.0002
-  obstacleRayLength: 100
+  progressRewardScale: 0.2
+  timePenalty: -0.001
+  obstacleRayLength: 200
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
@@ -89094,14 +89094,14 @@ MonoBehaviour:
   tiltSpeed: 5
   verticalDamping: 5
   horizontalDamping: 1
-  rayLength: 100
+  rayLength: 200
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
   finishReward: 1
-  progressRewardScale: 0.1
-  timePenalty: -0.0002
-  obstacleRayLength: 100
+  progressRewardScale: 0.2
+  timePenalty: -0.001
+  obstacleRayLength: 200
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
@@ -98718,14 +98718,14 @@ MonoBehaviour:
   tiltSpeed: 5
   verticalDamping: 5
   horizontalDamping: 1
-  rayLength: 100
+  rayLength: 200
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
   finishReward: 1
-  progressRewardScale: 0.1
-  timePenalty: -0.0002
-  obstacleRayLength: 100
+  progressRewardScale: 0.2
+  timePenalty: -0.001
+  obstacleRayLength: 200
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []
@@ -99662,14 +99662,14 @@ MonoBehaviour:
   tiltSpeed: 5
   verticalDamping: 5
   horizontalDamping: 1
-  rayLength: 100
+  rayLength: 200
   rayMask:
     serializedVersion: 2
     m_Bits: 4294967295
   finishReward: 1
-  progressRewardScale: 0.1
-  timePenalty: -0.0002
-  obstacleRayLength: 100
+  progressRewardScale: 0.2
+  timePenalty: -0.001
+  obstacleRayLength: 200
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
   propellers: []

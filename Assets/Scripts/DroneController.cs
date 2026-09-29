@@ -18,11 +18,11 @@ public class DroneMove : Agent
     [SerializeField] private float rayLength = 200f;
     [SerializeField] private LayerMask rayMask = ~0;
     [SerializeField] private float finishReward = 1f;
-    [SerializeField] private float progressRewardScale = 0.1f;
+    [SerializeField] private float progressRewardScale = 0.2f;
     [SerializeField] private float timePenalty = -0.001f;
 
     [Header("Obstacle Sensors")]
-    [SerializeField] private float obstacleRayLength = 100f;
+    [SerializeField] private float obstacleRayLength = 200f;
     [SerializeField] private float obstacleSphereRadius = 0.8f;
     [SerializeField] private float obstacleVerticalAngle = 30f;
 
@@ -292,22 +292,6 @@ public class DroneMove : Agent
         }
 
         return Mathf.Clamp01(closestDistance / obstacleRayLength);
-    }
-
-    private float GroundRayDistance(Vector3 direction)
-    {
-        if (Physics.Raycast(
-                transform.position,
-                direction,
-                out RaycastHit hit,
-                rayLength,
-                rayMask,
-                QueryTriggerInteraction.Ignore))
-        {
-            return Mathf.Clamp01(hit.distance / rayLength);
-        }
-
-        return 1f;
     }
 
     private Vector3 FindClosestTaggedRay(

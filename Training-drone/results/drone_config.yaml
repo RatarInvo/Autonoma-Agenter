@@ -47,8 +47,9 @@ behaviors:
     keep_checkpoints: 10
     checkpoint_interval: 500000
 
-    # Five million steps is a starting point, not a guarantee of convergence.
-    max_steps: 5000000
+
+    # Ten million steps is a starting point, not a guarantee of convergence.
+    max_steps: 10000000
 
     # If one decision represents approximately 0.02 seconds,
     # 128 decisions represent about 2.56 seconds of experience.
