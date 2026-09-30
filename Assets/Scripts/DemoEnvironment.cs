@@ -27,8 +27,16 @@ public class DemoEnvironment : MonoBehaviour, IRoverEnvironment
     public int minObstacles = 4;
     public int maxObstacles = 8;
     public float obstacleRadius = 20.0f;
+    public float corridorHalfWidth = 22.0f;
+    public float corridorPadding = 25.0f;
+    public int corridorObstacles = 3;
+    public float obstacleSpacing = 26.0f;
     public float meetingPointRadius = 14.0f;
     public float roverRadius = 8.0f;
+
+    [Header("Demo Loop")]
+    public bool restartAfterArrival = true;
+    public float holdSecondsAfterArrival = 10.0f;
 
     [Header("Marker")]
     public float meetingPointYOffset = 46.3f;
@@ -56,6 +64,10 @@ public class DemoEnvironment : MonoBehaviour, IRoverEnvironment
 
     private Vector3 meetingPointGround;
 
+    private Vector3 roverGround;
+
+    private float parkedSeconds;
+
     public void ResetEnvironment()
     {
         BuildTerrain();
@@ -69,6 +81,8 @@ public class DemoEnvironment : MonoBehaviour, IRoverEnvironment
         PlaceObstacles();
 
         PlaceDrone();
+
+        Physics.SyncTransforms();
     }
 
     private float GroundHeight(float worldX, float worldZ)
@@ -211,6 +225,8 @@ public class DemoEnvironment : MonoBehaviour, IRoverEnvironment
             break;
         }
 
+        roverGround = point;
+
         RoverSpawnPosition = point + Vector3.up * roverSpawnHeight;
 
         RoverSpawnRotation = Quaternion.Euler(0.0f, Random.Range(0.0f, 360.0f), 0.0f);
@@ -226,6 +242,36 @@ public class DemoEnvironment : MonoBehaviour, IRoverEnvironment
 
         return point.x > origin.x + margin && point.x < origin.x + size.x - margin
             && point.z > origin.z + margin && point.z < origin.z + size.z - margin;
+    }
+
+    private Vector3 RandomCorridorPoint()
+    {
+        Vector3 along = meetingPointGround - roverGround;
+
+        along.y = 0.0f;
+
+        float length = along.magnitude;
+
+        if (length < 1.0f)
+        {
+            return RandomGroundPoint();
+        }
+
+        Vector3 forward = along / length;
+
+        Vector3 side = new Vector3(-forward.z, 0.0f, forward.x);
+
+        float padding = corridorPadding / length;
+
+        float t = Random.Range(-padding, 1.0f + padding);
+
+        float offset = Random.Range(-corridorHalfWidth, corridorHalfWidth);
+
+        Vector3 point = roverGround + forward * (t * length) + side * offset;
+
+        point.y = SampleGround(point.x, point.z);
+
+        return InsideMap(point) ? point : RandomGroundPoint();
     }
 
     private void PlaceObstacles()
@@ -258,9 +304,11 @@ public class DemoEnvironment : MonoBehaviour, IRoverEnvironment
 
             for (int attempt = 0; attempt < placementAttempts; attempt++)
             {
-                point = RandomGroundPoint();
+                bool tryCorridor = i < corridorObstacles && attempt < placementAttempts / 2;
 
-                if (IsClear(point, obstacleRadius))
+                point = tryCorridor ? RandomCorridorPoint() : RandomGroundPoint();
+
+                if (IsClear(point, obstacleSpacing))
                 {
                     found = true;
 
@@ -281,8 +329,34 @@ public class DemoEnvironment : MonoBehaviour, IRoverEnvironment
 
             instance.transform.rotation = Quaternion.Euler(0.0f, Random.Range(0.0f, 360.0f), 0.0f);
 
-            Reserve(point, obstacleRadius);
+            Reserve(point, obstacleSpacing);
         }
+    }
+
+    private void Update()
+    {
+        if (!restartAfterArrival || rover == null)
+        {
+            return;
+        }
+
+        if (!rover.IsParked)
+        {
+            parkedSeconds = 0.0f;
+
+            return;
+        }
+
+        parkedSeconds += Time.deltaTime;
+
+        if (parkedSeconds < holdSecondsAfterArrival)
+        {
+            return;
+        }
+
+        parkedSeconds = 0.0f;
+
+        rover.EndEpisode();
     }
 
     private void PlaceDrone()

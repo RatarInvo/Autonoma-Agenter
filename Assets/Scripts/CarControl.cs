@@ -372,9 +372,13 @@ public class CarControl : Agent
 
         AddReward(arrivalReward);
 
+        currentOutcome = EpisodeOutcome.Arrived;
+
+        outcomeSet = true;
+
         if (soloTraining)
         {
-            EndWith(EpisodeOutcome.Arrived);
+            EndEpisode();
         }
     }
 

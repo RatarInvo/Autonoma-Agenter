@@ -2152,8 +2152,14 @@ MonoBehaviour:
   minObstacles: 4
   maxObstacles: 8
   obstacleRadius: 20
+  corridorHalfWidth: 22
+  corridorPadding: 25
+  corridorObstacles: 3
+  obstacleSpacing: 26
   meetingPointRadius: 14
   roverRadius: 8
+  restartAfterArrival: 1
+  holdSecondsAfterArrival: 10
   meetingPointYOffset: 46.3
   droneMinHeight: 30
   droneMaxHeight: 60

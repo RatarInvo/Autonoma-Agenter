@@ -116,6 +116,8 @@ public class TrainingArea : MonoBehaviour, IRoverEnvironment
         PlaceMeetingPoint();
 
         PlaceRover();
+
+        Physics.SyncTransforms();
     }
 
     private float GroundHeight(float localX, float localZ)
