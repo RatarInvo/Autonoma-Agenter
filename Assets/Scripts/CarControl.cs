@@ -47,7 +47,7 @@ public class CarControl : Agent
     private Rigidbody rb;
 
     // training area for car
-    private TrainingArea area;
+    private IRoverEnvironment environment;
 
     private float currentTurnAngle = 0.0f;
 
@@ -110,7 +110,7 @@ public class CarControl : Agent
         startPosition = transform.position;
         startRotation = transform.rotation;
 
-        area = GetComponentInParent<TrainingArea>();
+        environment = GetComponentInParent<IRoverEnvironment>();
     }
 
     public override void OnEpisodeBegin()
@@ -130,12 +130,12 @@ public class CarControl : Agent
         Vector3 spawnPosition = startPosition;
         Quaternion spawnRotation = startRotation;
 
-        if (area != null)
+        if (environment != null)
         {
-            area.ResetArea();
+            environment.ResetEnvironment();
 
-            spawnPosition = area.RoverSpawnPosition;
-            spawnRotation = area.RoverSpawnRotation;
+            spawnPosition = environment.RoverSpawnPosition;
+            spawnRotation = environment.RoverSpawnRotation;
         }
 
         transform.SetPositionAndRotation(spawnPosition, spawnRotation);

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrainingArea : MonoBehaviour
+public class TrainingArea : MonoBehaviour, IRoverEnvironment
 {
     public enum Level
     {
@@ -102,6 +102,8 @@ public class TrainingArea : MonoBehaviour
             rover.distanceNormalizer = areaSize * 1.4142f;
         }
     }
+
+    void IRoverEnvironment.ResetEnvironment() => ResetArea();
 
     public void ResetArea()
     {
