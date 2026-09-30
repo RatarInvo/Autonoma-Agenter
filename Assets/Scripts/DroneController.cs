@@ -15,14 +15,14 @@ public class DroneMove : Agent
     [SerializeField] private float horizontalDamping = 1f;
 
     [Header("Finish Line")]
-    [SerializeField] private float rayLength = 200f;
+    [SerializeField] private float rayLength = 300f;
     [SerializeField] private LayerMask rayMask = ~0;
     [SerializeField] private float finishReward = 1f;
-    [SerializeField] private float progressRewardScale = 0.2f;
-    [SerializeField] private float timePenalty = -0.001f;
+    [SerializeField] private float progressRewardScale = 0.4f;
+    [SerializeField] private float timePenalty = -0.0005f;
 
     [Header("Obstacle Sensors")]
-    [SerializeField] private float obstacleRayLength = 200f;
+    [SerializeField] private float obstacleRayLength = 300f;
     [SerializeField] private float obstacleSphereRadius = 0.8f;
     [SerializeField] private float obstacleVerticalAngle = 30f;
 
@@ -538,10 +538,13 @@ public class DroneMove : Agent
             / rayLength
             * progressRewardScale
         );
+        
 
         previousFinishDistance = finishDistance;
 
         AddReward(timePenalty);
+
+
     }
 
     private void FixedUpdate()
