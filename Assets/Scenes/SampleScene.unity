@@ -684,6 +684,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: rock
       objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: befdde6fd81058948a13ce55df4ac035, type: 3}
+      propertyPath: m_TagString
+      value: rock
+      objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: befdde6fd81058948a13ce55df4ac035, type: 3}
       propertyPath: m_LocalScale.x
       value: 10
@@ -740,9 +744,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 100004, guid: befdde6fd81058948a13ce55df4ac035, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1284208435}
     - targetCorrespondingSourceObject: {fileID: 100004, guid: befdde6fd81058948a13ce55df4ac035, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1284208434}
@@ -1425,33 +1426,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.4274, y: 0.8839, z: 0.86039996}
   m_Center: {x: -0.018899977, y: 0.06364998, z: -0.023399994}
---- !u!54 &1278308817
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1278308814}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &1284208432 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100004, guid: befdde6fd81058948a13ce55df4ac035, type: 3}
@@ -1478,33 +1452,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.4274, y: 0.8839, z: 0.86039996}
   m_Center: {x: -0.018899977, y: 0.06364998, z: -0.023399994}
---- !u!54 &1284208435
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1284208432}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &1320695771
 GameObject:
   m_ObjectHideFlags: 0
@@ -1811,6 +1758,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: rock
       objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: befdde6fd81058948a13ce55df4ac035, type: 3}
+      propertyPath: m_TagString
+      value: rock
+      objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: befdde6fd81058948a13ce55df4ac035, type: 3}
       propertyPath: m_LocalScale.x
       value: 10
@@ -1869,9 +1820,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 100004, guid: befdde6fd81058948a13ce55df4ac035, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1278308817}
-    - targetCorrespondingSourceObject: {fileID: 100004, guid: befdde6fd81058948a13ce55df4ac035, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1278308816}
   m_SourcePrefab: {fileID: 100100000, guid: befdde6fd81058948a13ce55df4ac035, type: 3}
 --- !u!4 &1935619482 stripped
@@ -1892,6 +1840,10 @@ PrefabInstance:
       value: Truck
       objectReference: {fileID: 0}
     - target: {fileID: 406654488547587609, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
+      propertyPath: MaxStep
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 406654488547587609, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -1908,8 +1860,16 @@ PrefabInstance:
       value: -0.0002
       objectReference: {fileID: 0}
     - target: {fileID: 406654488547587609, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
+      propertyPath: soloTraining
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 406654488547587609, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
       propertyPath: arrivalReward
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 406654488547587609, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
+      propertyPath: distanceNormalizer
+      value: 212.12999
       objectReference: {fileID: 0}
     - target: {fileID: 406654488547587609, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
       propertyPath: progressRewardScale
@@ -1956,12 +1916,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4942132855396177709, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 5022602860645237092, guid: a6feb6b8a54a3aa45b57f91e45c1e006, type: 3}
+    - target: {fileID: 4942132855396177709, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
       propertyPath: m_BehaviorName
       value: TruckBrain
       objectReference: {fileID: 0}
     - target: {fileID: 4942132855396177709, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
       propertyPath: m_BehaviorType
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4942132855396177709, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
+      propertyPath: m_DeterministicInference
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4942132855396177709, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
       propertyPath: m_BrainParameters.VectorActionSpaceType
@@ -1994,6 +1962,22 @@ PrefabInstance:
     - target: {fileID: 4942132855396177709, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
       propertyPath: 'm_BrainParameters.m_ActionSpec.BranchSizes.Array.data[1]'
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7517871414424386107, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
+      propertyPath: m_RayLength
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 7517871414424386107, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
+      propertyPath: m_MaxRayDegrees
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 7517871414424386107, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
+      propertyPath: m_RaysPerDirection
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7517871414424386107, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
+      propertyPath: m_EndVerticalOffset
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
