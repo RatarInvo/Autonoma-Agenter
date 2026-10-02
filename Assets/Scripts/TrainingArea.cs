@@ -33,13 +33,13 @@ public class TrainingArea : MonoBehaviour, IRoverEnvironment
     public float hillFrequency = 0.012f;
 
     [Header("Fixed Placement")]
-    public Vector3 fixedRoverLocal = new Vector3(0.0f, 0.0f, -35.0f);
     public Vector3 fixedMeetingPointLocal = new Vector3(0.0f, 0.0f, 35.0f);
 
     [Header("Random Placement")]
     public float spawnMargin = 15.0f;
     public float minSeparation = 45.0f;
-    public float roverSpawnHeight = 1.0f;
+    public float droneSpawnHeight = 10.0f;
+    public float droneRadius = 8.0f;
     public int placementAttempts = 40;
 
     [Header("Obstacles")]
@@ -49,19 +49,19 @@ public class TrainingArea : MonoBehaviour, IRoverEnvironment
     public int maxObstacles = 10;
     public float obstacleRadius = 18.0f;
     public float meetingPointRadius = 14.0f;
-    public float roverRadius = 8.0f;
     public int fixedObstacleSeed = 20260922;
 
-    [Header("References")]
-    public CarControl rover;
-    public Transform meetingPoint;
-    public MeshFilter groundMeshFilter;
-    public MeshCollider groundMeshCollider;
-    public Transform obstacleRoot;
+     [Header("References")]
+     public DroneMove drone;
+     public Transform meetingPoint;
+     public MeshFilter groundMeshFilter;
+     public MeshCollider groundMeshCollider;
+     public Transform obstacleRoot;
 
-    public Vector3 RoverSpawnPosition { get; private set; }
 
-    public Quaternion RoverSpawnRotation { get; private set; }
+     public Vector3 DroneSpawnPosition { get; private set; }
+
+     public Quaternion DroneSpawnRotation { get; private set; }
 
     private struct Reserved
     {
@@ -96,10 +96,23 @@ public class TrainingArea : MonoBehaviour, IRoverEnvironment
         groundMesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
 
         groundMeshFilter.sharedMesh = groundMesh;
+    }
 
-        if (rover != null)
+     public void ResetArea()
+     {
+         BuildGround();
+ 
+         reserved.Clear();
+ 
+         PlaceObstacles();
+ 
+         PlaceMeetingPoint();
+ 
+         PlaceDrone();
+
+         if (drone != null)
         {
-            rover.distanceNormalizer = areaSize * 1.4142f;
+           drone.ResetToSpawn(DroneSpawnPosition, DroneSpawnRotation);
         }
     }
 
@@ -337,29 +350,23 @@ public class TrainingArea : MonoBehaviour, IRoverEnvironment
         Reserve(meetingPointLocal, meetingPointRadius);
     }
 
-    private void PlaceRover()
+    private void PlaceDrone()
     {
-        Vector3 localPoint;
+        // Keep the drone away from the meeting point.
+        Reserve(meetingPointLocal, minSeparation);
 
-        if (RandomizePositions)
-        {
-            Reserve(meetingPointLocal, minSeparation);
+        // Random position inside this TrainingArea.
+        TryFindSpot(droneRadius, out Vector3 droneLocalPoint);
 
-            TryFindSpot(roverRadius, out localPoint);
-        }
-        else
-        {
-            localPoint = fixedRoverLocal;
+        DroneSpawnPosition = transform.TransformPoint(
+            droneLocalPoint + Vector3.up * droneSpawnHeight
+        );
 
-            localPoint.y = GroundHeight(localPoint.x, localPoint.z);
-        }
-
-        RoverSpawnPosition = transform.TransformPoint(localPoint + Vector3.up * roverSpawnHeight);
-
-        float yaw = RandomizePositions ? Random.Range(0.0f, 360.0f) : 0.0f;
-
-        RoverSpawnRotation = transform.rotation * Quaternion.Euler(0.0f, yaw, 0.0f);
-
-        Reserve(localPoint, roverRadius);
+        DroneSpawnRotation =
+            transform.rotation *
+            Quaternion.Euler(0.0f, Random.Range(0.0f, 360.0f), 0.0f);
+    
+        Reserve(droneLocalPoint, droneRadius);
     }
+
 }

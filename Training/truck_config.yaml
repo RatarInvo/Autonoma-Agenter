@@ -38,7 +38,7 @@ behaviors:
     threaded: false
 
 env_settings:
-  num_envs: 1
+  num_envs: 8
   base_port: 5005
   seed: -1
 
@@ -49,4 +49,4 @@ engine_settings:
   time_scale: 20
   target_frame_rate: -1
   capture_frame_rate: 60
-  no_graphics: false
+  no_graphics: true

@@ -1,0 +1,110 @@
+{
+    "My Behavior": {
+        "checkpoints": [
+            {
+                "steps": 999935,
+                "file_path": "results\\Stage6b\\My Behavior\\My Behavior-999935.onnx",
+                "reward": -0.48229299382203156,
+                "creation_time": 1790926199.6832113,
+                "auxillary_file_paths": [
+                    "results\\Stage6b\\My Behavior\\My Behavior-999935.pt"
+                ]
+            },
+            {
+                "steps": 1499952,
+                "file_path": "results\\Stage6b\\My Behavior\\My Behavior-1499952.onnx",
+                "reward": -0.16840794411572543,
+                "creation_time": 1790926398.8652415,
+                "auxillary_file_paths": [
+                    "results\\Stage6b\\My Behavior\\My Behavior-1499952.pt"
+                ]
+            },
+            {
+                "steps": 1999882,
+                "file_path": "results\\Stage6b\\My Behavior\\My Behavior-1999882.onnx",
+                "reward": null,
+                "creation_time": 1790926609.761177,
+                "auxillary_file_paths": [
+                    "results\\Stage6b\\My Behavior\\My Behavior-1999882.pt"
+                ]
+            },
+            {
+                "steps": 2499962,
+                "file_path": "results\\Stage6b\\My Behavior\\My Behavior-2499962.onnx",
+                "reward": 0.03384737173716227,
+                "creation_time": 1790926821.081598,
+                "auxillary_file_paths": [
+                    "results\\Stage6b\\My Behavior\\My Behavior-2499962.pt"
+                ]
+            },
+            {
+                "steps": 2999939,
+                "file_path": "results\\Stage6b\\My Behavior\\My Behavior-2999939.onnx",
+                "reward": 0.370113592594862,
+                "creation_time": 1790927047.051901,
+                "auxillary_file_paths": [
+                    "results\\Stage6b\\My Behavior\\My Behavior-2999939.pt"
+                ]
+            },
+            {
+                "steps": 3499926,
+                "file_path": "results\\Stage6b\\My Behavior\\My Behavior-3499926.onnx",
+                "reward": 0.08162493081319899,
+                "creation_time": 1790927275.6248267,
+                "auxillary_file_paths": [
+                    "results\\Stage6b\\My Behavior\\My Behavior-3499926.pt"
+                ]
+            },
+            {
+                "steps": 3999968,
+                "file_path": "results\\Stage6b\\My Behavior\\My Behavior-3999968.onnx",
+                "reward": 0.019312469164530437,
+                "creation_time": 1790927500.8123236,
+                "auxillary_file_paths": [
+                    "results\\Stage6b\\My Behavior\\My Behavior-3999968.pt"
+                ]
+            },
+            {
+                "steps": 4499998,
+                "file_path": "results\\Stage6b\\My Behavior\\My Behavior-4499998.onnx",
+                "reward": 0.18361100554466248,
+                "creation_time": 1790927731.2395978,
+                "auxillary_file_paths": [
+                    "results\\Stage6b\\My Behavior\\My Behavior-4499998.pt"
+                ]
+            },
+            {
+                "steps": 4999953,
+                "file_path": "results\\Stage6b\\My Behavior\\My Behavior-4999953.onnx",
+                "reward": 0.4331648993705,
+                "creation_time": 1790927954.676076,
+                "auxillary_file_paths": [
+                    "results\\Stage6b\\My Behavior\\My Behavior-4999953.pt"
+                ]
+            },
+            {
+                "steps": 5000019,
+                "file_path": "results\\Stage6b\\My Behavior\\My Behavior-5000019.onnx",
+                "reward": 0.43761712362368904,
+                "creation_time": 1790927954.7833598,
+                "auxillary_file_paths": [
+                    "results\\Stage6b\\My Behavior\\My Behavior-5000019.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 5000019,
+            "file_path": "results\\Stage6b\\My Behavior.onnx",
+            "reward": 0.43761712362368904,
+            "creation_time": 1790927954.7833598,
+            "auxillary_file_paths": [
+                "results\\Stage6b\\My Behavior\\My Behavior-5000019.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.1.1+cpu"
+    }
+}
