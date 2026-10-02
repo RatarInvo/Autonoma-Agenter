@@ -21,18 +21,6 @@ public class DroneMove : Agent
     [SerializeField] private float progressRewardScale = 0.4f;
     [SerializeField] private float timePenalty = -0.001f;
 
-    [Header("Truck Landing")]
-    [SerializeField] private CarControl truck;
-    [SerializeField] private bool coordinateTruckEpisode = true;
-    [SerializeField] private float waitingHeight = 20f;
-    [SerializeField] private float landingHeight = 1.5f;
-    [SerializeField] private float landingHorizontalGain = 3f;
-    [SerializeField] private float landingVerticalGain = 4f;
-    [SerializeField] private float landingSpeed = 1f;
-    [SerializeField] private float landingRadius = 1.5f;
-    [SerializeField] private float landingHeightTolerance = 0.75f;
-    [SerializeField] private float landingReward = 5f;
-
     [Header("Obstacle Sensors")]
     [SerializeField] private float obstacleRayLength = 300f;
     [SerializeField] private float obstacleSphereRadius = 0.8f;
@@ -57,16 +45,6 @@ public class DroneMove : Agent
 
     private TrainingArea area;
 
-    private Transform finishCenter;
-    private LandingPhase landingPhase;
-
-    private enum LandingPhase
-    {
-        Approach,
-        WaitingForTruck,
-        Descending,
-    }
-
     protected override void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -75,7 +53,6 @@ public class DroneMove : Agent
         startingRotation = transform.rotation;
         targetRotation = startingRotation;
         area = GetComponentInParent<TrainingArea>();
-        FindTruck();
 
         MaxStep = 4000;
     }
@@ -89,7 +66,6 @@ public class DroneMove : Agent
         targetRotation = startingRotation;
 
         area = GetComponentInParent<TrainingArea>();
-        FindTruck();
     }
 
     public override void OnEpisodeBegin()
@@ -97,9 +73,6 @@ public class DroneMove : Agent
         episodeEnding = false;
 
         ResetState();
-
-        landingPhase = LandingPhase.Approach;
-        finishCenter = area != null ? area.meetingPoint : null;
 
         Vector3 spawnPosition = startingPosition;
         Quaternion spawnRotation = startingRotation;
@@ -147,7 +120,6 @@ public class DroneMove : Agent
         movementInput = Vector2.zero;
 
         targetRotation = transform.rotation;
-        landingPhase = LandingPhase.Approach;
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -338,30 +310,39 @@ public class DroneMove : Agent
             Vector3 direction =
                 Quaternion.Euler(0f, angle, 0f) * transform.forward;
 
-            if (!Physics.Raycast(
-                    transform.position,
-                    direction,
-                    out RaycastHit hit,
-                    rayLength,
-                    rayMask,
-                    QueryTriggerInteraction.Collide))
-            {
-                continue;
-            }
+            RaycastHit[] hits = Physics.RaycastAll(
+                transform.position,
+                direction,
+                rayLength,
+                rayMask,
+                QueryTriggerInteraction.Collide
+            );
 
-            if (!IsTaggedWithTagInParent(hit.collider, tag))
-            {
-                continue;
-            }
+            System.Array.Sort(hits, (first, second) =>
+                first.distance.CompareTo(second.distance));
 
-            if (hit.distance >= closestDistance)
+            foreach (RaycastHit hit in hits)
             {
-                continue;
-            }
+                if (hit.collider == null)
+                {
+                    continue;
+                }
 
-            closestHit = hit;
-            closestDistance = hit.distance;
-            closestDirection = direction;
+                if (!IsTaggedWithTagInParent(hit.collider, tag))
+                {
+                    break;
+                }
+
+                if (hit.distance >= closestDistance)
+                {
+                    break;
+                }
+
+                closestHit = hit;
+                closestDistance = hit.distance;
+                closestDirection = direction;
+                break;
+            }
         }
 
         return closestDirection;
@@ -385,7 +366,8 @@ public class DroneMove : Agent
     private bool IsTaggedAsObstacle(Collider collider)
     {
         return IsTaggedWithTagInParent(collider, "building")
-            || IsTaggedWithTagInParent(collider, "rock");
+            || IsTaggedWithTagInParent(collider, "rock")
+            || IsTaggedWithTagInParent(collider, "walls");
     }
 
     private bool IsTaggedWithTagInParent(
@@ -423,7 +405,7 @@ public class DroneMove : Agent
                 collision.collider,
                 "finishline"))
         {
-            BeginWaitingForTruck(collision.collider.transform);
+            CompleteEpisode();
             return;
         }
 
@@ -437,7 +419,7 @@ public class DroneMove : Agent
     {
         if (IsTaggedWithTagInParent(other, "finishline"))
         {
-            BeginWaitingForTruck(other.transform);
+            CompleteEpisode();
             return;
         }
 
@@ -447,105 +429,17 @@ public class DroneMove : Agent
         }
     }
 
-    private void BeginWaitingForTruck(Transform finishTransform)
+    private void CompleteEpisode()
     {
-        if (episodeEnding || landingPhase != LandingPhase.Approach)
+        if (episodeEnding)
         {
             return;
         }
 
-        landingPhase = LandingPhase.WaitingForTruck;
-        finishCenter = area != null && area.meetingPoint != null
-            ? area.meetingPoint
-            : finishTransform;
+        episodeEnding = true;
 
         AddReward(finishReward);
-    }
-
-    private void FindTruck()
-    {
-        if (truck == null && area != null)
-        {
-            truck = area.GetComponentInChildren<CarControl>(true);
-        }
-
-        if (coordinateTruckEpisode && truck != null)
-        {
-            truck.soloTraining = false;
-        }
-    }
-
-    private void UpdateLandingPhase()
-    {
-        if (landingPhase == LandingPhase.WaitingForTruck
-            && truck != null
-            && truck.IsParked
-            && truck.LandingPad != null)
-        {
-            landingPhase = LandingPhase.Descending;
-        }
-
-        if (landingPhase != LandingPhase.Descending
-            || truck == null
-            || truck.LandingPad == null)
-        {
-            return;
-        }
-
-        Vector3 landingPosition = truck.LandingPad.position
-            + Vector3.up * landingHeight;
-
-        Vector3 horizontalError = landingPosition - transform.position;
-        horizontalError.y = 0f;
-
-        bool settled = horizontalError.magnitude <= landingRadius
-            && Mathf.Abs(transform.position.y - landingPosition.y)
-                <= landingHeightTolerance
-            && rb.linearVelocity.magnitude <= landingSpeed;
-
-        if (settled)
-        {
-            episodeEnding = true;
-            AddReward(landingReward);
-            EndEpisode();
-        }
-    }
-
-    private void ApplyLandingControl()
-    {
-        if (landingPhase == LandingPhase.Descending
-            && (truck == null || truck.LandingPad == null))
-        {
-            return;
-        }
-
-        Vector3 targetPosition = landingPhase == LandingPhase.WaitingForTruck
-            ? finishCenter != null
-                ? finishCenter.position + Vector3.up * waitingHeight
-                : transform.position
-            : truck.LandingPad.position + Vector3.up * landingHeight;
-
-        Vector3 horizontalError = targetPosition - transform.position;
-        horizontalError.y = 0f;
-
-        Vector3 horizontalVelocity = rb.linearVelocity;
-        horizontalVelocity.y = 0f;
-
-        rb.AddForce(
-            horizontalError * landingHorizontalGain
-            - horizontalVelocity * horizontalDamping,
-            ForceMode.Force
-        );
-
-        verticalInput = Mathf.Clamp(
-            (targetPosition.y - transform.position.y)
-            * landingVerticalGain
-            - rb.linearVelocity.y * verticalDamping,
-            -movementForce,
-            movementForce
-        );
-
-        movementInput = Vector2.zero;
+        EndEpisode();
     }
 
     private void ResetAfterObstacleHit()
@@ -654,10 +548,13 @@ public class DroneMove : Agent
             / rayLength
             * progressRewardScale
         );
+        
 
         previousFinishDistance = finishDistance;
 
         AddReward(timePenalty);
+
+
     }
 
     private void FixedUpdate()
@@ -665,13 +562,6 @@ public class DroneMove : Agent
         if (rb == null)
         {
             return;
-        }
-
-        UpdateLandingPhase();
-
-        if (landingPhase != LandingPhase.Approach)
-        {
-            ApplyLandingControl();
         }
 
         Hover(verticalInput);
