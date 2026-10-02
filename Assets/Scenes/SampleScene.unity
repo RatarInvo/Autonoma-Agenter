@@ -4112,7 +4112,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: fa7c61c7292fcdf479c704fd16cf776a, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 93e46325091c17c4ba8e2f9dfcd75c0b, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: My Behavior
