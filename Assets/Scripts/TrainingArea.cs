@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrainingArea : MonoBehaviour
+public class TrainingArea : MonoBehaviour, IRoverEnvironment
 {
     public enum Level
     {
@@ -114,7 +114,24 @@ public class TrainingArea : MonoBehaviour
         {
            drone.ResetToSpawn(DroneSpawnPosition, DroneSpawnRotation);
         }
-     }
+    }
+
+    void IRoverEnvironment.ResetEnvironment() => ResetArea();
+
+    public void ResetArea()
+    {
+        BuildGround();
+
+        reserved.Clear();
+
+        PlaceObstacles();
+
+        PlaceMeetingPoint();
+
+        PlaceRover();
+
+        Physics.SyncTransforms();
+    }
 
     private float GroundHeight(float localX, float localZ)
     {

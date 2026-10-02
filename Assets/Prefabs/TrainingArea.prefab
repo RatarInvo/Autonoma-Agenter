@@ -766,10 +766,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8273945254092494bbc2a24b837b8e2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrainingArea
-  level: 2
+  level: 5
   areaSize: 150
   gridResolution: 40
-  hillAmplitude: 12
+  hillAmplitude: 24
   hillFrequency: 0.012
   fixedRoverLocal: {x: 0, y: 0, z: -35}
   fixedMeetingPointLocal: {x: 0, y: 0, z: 35}

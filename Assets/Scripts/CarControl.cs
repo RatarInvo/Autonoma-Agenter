@@ -30,7 +30,7 @@ public class CarControl : Agent
 
     [Header("Shaping")]
     public float progressRewardScale = 1.0f;
-    public float timePenalty = -0.0002f;
+    public float timePenalty = -0.000667f;
 
     [Header("Rollover")]
     public float rolloverPenalty = -1.0f;
@@ -47,7 +47,7 @@ public class CarControl : Agent
     private Rigidbody rb;
 
     // training area for car
-    private TrainingArea area;
+    private IRoverEnvironment environment;
 
     private float currentTurnAngle = 0.0f;
 
@@ -65,6 +65,36 @@ public class CarControl : Agent
     // true once the rover is inside the meeting point
     public bool IsParked => parked;
 
+    public enum EpisodeOutcome
+    {
+        TimedOut = 0,
+        Arrived = 1,
+        RolledOver = 2,
+        HitObstacle = 3,
+        HitWall = 4,
+    }
+
+    public EpisodeOutcome LastOutcome { get; private set; }
+
+    private EpisodeOutcome currentOutcome;
+
+    private bool outcomeSet;
+
+    private readonly int[] outcomeCounts = new int[5];
+
+    public int OutcomeCount(EpisodeOutcome outcome) => outcomeCounts[(int)outcome];
+
+    public void ResetOutcomeCounts() => System.Array.Clear(outcomeCounts, 0, outcomeCounts.Length);
+
+    private void EndWith(EpisodeOutcome outcome)
+    {
+        currentOutcome = outcome;
+
+        outcomeSet = true;
+
+        EndEpisode();
+    }
+
     public Transform LandingPad => landingPad;
 
     // Starting position for resetting the car
@@ -80,23 +110,32 @@ public class CarControl : Agent
         startPosition = transform.position;
         startRotation = transform.rotation;
 
-        area = GetComponentInParent<TrainingArea>();
+        environment = GetComponentInParent<IRoverEnvironment>();
     }
 
     public override void OnEpisodeBegin()
     {
+        if (CompletedEpisodes > 0)
+        {
+            LastOutcome = outcomeSet ? currentOutcome : EpisodeOutcome.TimedOut;
+
+            outcomeCounts[(int)LastOutcome]++;
+        }
+
+        outcomeSet = false;
+
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
 
         Vector3 spawnPosition = startPosition;
         Quaternion spawnRotation = startRotation;
 
-        if (area != null)
+        if (environment != null)
         {
-            area.ResetArea();
+            environment.ResetEnvironment();
 
-            //spawnPosition = area.RoverSpawnPosition;
-            //spawnRotation = area.RoverSpawnRotation;
+            spawnPosition = environment.RoverSpawnPosition;
+            spawnRotation = environment.RoverSpawnRotation;
         }
 
         transform.SetPositionAndRotation(spawnPosition, spawnRotation);
@@ -333,6 +372,10 @@ public class CarControl : Agent
 
         AddReward(arrivalReward);
 
+        currentOutcome = EpisodeOutcome.Arrived;
+
+        outcomeSet = true;
+
         if (soloTraining)
         {
             EndEpisode();
@@ -357,7 +400,7 @@ public class CarControl : Agent
 
         AddReward(rolloverPenalty);
 
-        EndEpisode();
+        EndWith(EpisodeOutcome.RolledOver);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -366,21 +409,21 @@ public class CarControl : Agent
         {
             AddReward(obstaclePenalty);
 
-            EndEpisode();
+            EndWith(EpisodeOutcome.HitObstacle);
         }
 
         if (collision.gameObject.CompareTag("rock"))
         {
             AddReward(obstaclePenalty);
 
-            EndEpisode();
+            EndWith(EpisodeOutcome.HitObstacle);
         }
 
         if (collision.gameObject.CompareTag("walls"))
         {
             AddReward(wallPenalty);
 
-            EndEpisode();
+            EndWith(EpisodeOutcome.HitWall);
         }
     }
 }

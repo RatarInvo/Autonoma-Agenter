@@ -1394,7 +1394,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 5000
+  MaxStep: 1500
   enginePower: 2000
   wallPenalty: -1
   obstaclePenalty: -1
@@ -1420,7 +1420,7 @@ MonoBehaviour:
   arrivalHoldSteps: 50
   arrivalReward: 5
   progressRewardScale: 1
-  timePenalty: -0.0002
+  timePenalty: -0.000667
   rolloverPenalty: -1
   rolloverUprightLimit: 0.3
   rolloverHoldSteps: 30
@@ -1452,14 +1452,14 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 0a2a723442a06ec4c8042df3a02d563f, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: a6feb6b8a54a3aa45b57f91e45c1e006, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: TruckBrain
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
-  m_DeterministicInference: 0
+  m_DeterministicInference: 1
   m_ObservableAttributeHandling: 0
 --- !u!114 &6293905515702244817
 MonoBehaviour:
@@ -1507,7 +1507,7 @@ MonoBehaviour:
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 2
-  m_EndVerticalOffset: 0
+  m_EndVerticalOffset: 4
 --- !u!1 &6951380693540667324
 GameObject:
   m_ObjectHideFlags: 0
