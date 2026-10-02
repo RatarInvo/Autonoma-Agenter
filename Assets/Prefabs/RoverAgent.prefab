@@ -1419,6 +1419,7 @@ MonoBehaviour:
   arrivalSpeed: 0.5
   arrivalHoldSteps: 50
   arrivalReward: 5
+  centeringReward: 8
   progressRewardScale: 1
   timePenalty: -0.000667
   rolloverPenalty: -1
@@ -1452,7 +1453,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: a6feb6b8a54a3aa45b57f91e45c1e006, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 9a5390d7b6c88d14898ea7f9f38b638a, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: TruckBrain

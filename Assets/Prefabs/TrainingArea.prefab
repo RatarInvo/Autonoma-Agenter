@@ -777,6 +777,8 @@ MonoBehaviour:
   minSeparation: 45
   roverSpawnHeight: 1
   placementAttempts: 40
+  droneSpawnHeight: 10
+  droneRadius: 8
   obstaclePrefabs:
   - {fileID: 1630345017845815259, guid: 1a1981bf0abf8e14dbb282167c6836fc, type: 3}
   - {fileID: 6093976272670033015, guid: c142841091b663243ab6fc784c04e921, type: 3}
@@ -789,6 +791,7 @@ MonoBehaviour:
   meetingPointRadius: 14
   roverRadius: 8
   fixedObstacleSeed: 20260922
+  drone: {fileID: 0}
   rover: {fileID: 7685232959900955651}
   meetingPoint: {fileID: 3818688417505300891}
   groundMeshFilter: {fileID: 1637462252666891867}

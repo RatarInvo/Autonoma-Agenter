@@ -27,6 +27,7 @@ public class CarControl : Agent
     public float arrivalSpeed = 0.5f;
     public int arrivalHoldSteps = 50;
     public float arrivalReward = 5.0f;
+    public float centeringReward = 8.0f;
 
     [Header("Shaping")]
     public float progressRewardScale = 1.0f;
@@ -370,7 +371,8 @@ public class CarControl : Agent
         // held inside the meeting point long enough to count as parked.
         parked = true;
 
-        AddReward(arrivalReward);
+        AddReward(arrivalReward
+            + centeringReward * Mathf.Clamp01(1.0f - distanceToFinish / arrivalRadius));
 
         currentOutcome = EpisodeOutcome.Arrived;
 

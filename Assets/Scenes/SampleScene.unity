@@ -4868,6 +4868,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 406654488547587609, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
+      propertyPath: centeringReward
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 406654488547587609, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
       propertyPath: distanceNormalizer
       value: 212.12999
       objectReference: {fileID: 0}
@@ -4918,7 +4922,7 @@ PrefabInstance:
     - target: {fileID: 4942132855396177709, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: a6feb6b8a54a3aa45b57f91e45c1e006, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: 9a5390d7b6c88d14898ea7f9f38b638a, type: 3}
     - target: {fileID: 4942132855396177709, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
       propertyPath: m_BehaviorName
       value: TruckBrain
