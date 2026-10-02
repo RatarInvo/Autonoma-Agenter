@@ -19,7 +19,7 @@ public class DroneMove : Agent
     [SerializeField] private LayerMask rayMask = ~0;
     [SerializeField] private float finishReward = 1f;
     [SerializeField] private float progressRewardScale = 0.4f;
-    [SerializeField] private float timePenalty = -0.0005f;
+    [SerializeField] private float timePenalty = -0.001f;
 
     [Header("Obstacle Sensors")]
     [SerializeField] private float obstacleRayLength = 300f;
@@ -310,30 +310,39 @@ public class DroneMove : Agent
             Vector3 direction =
                 Quaternion.Euler(0f, angle, 0f) * transform.forward;
 
-            if (!Physics.Raycast(
-                    transform.position,
-                    direction,
-                    out RaycastHit hit,
-                    rayLength,
-                    rayMask,
-                    QueryTriggerInteraction.Collide))
-            {
-                continue;
-            }
+            RaycastHit[] hits = Physics.RaycastAll(
+                transform.position,
+                direction,
+                rayLength,
+                rayMask,
+                QueryTriggerInteraction.Collide
+            );
 
-            if (!IsTaggedWithTagInParent(hit.collider, tag))
-            {
-                continue;
-            }
+            System.Array.Sort(hits, (first, second) =>
+                first.distance.CompareTo(second.distance));
 
-            if (hit.distance >= closestDistance)
+            foreach (RaycastHit hit in hits)
             {
-                continue;
-            }
+                if (hit.collider == null)
+                {
+                    continue;
+                }
 
-            closestHit = hit;
-            closestDistance = hit.distance;
-            closestDirection = direction;
+                if (!IsTaggedWithTagInParent(hit.collider, tag))
+                {
+                    break;
+                }
+
+                if (hit.distance >= closestDistance)
+                {
+                    break;
+                }
+
+                closestHit = hit;
+                closestDistance = hit.distance;
+                closestDirection = direction;
+                break;
+            }
         }
 
         return closestDirection;
@@ -357,7 +366,8 @@ public class DroneMove : Agent
     private bool IsTaggedAsObstacle(Collider collider)
     {
         return IsTaggedWithTagInParent(collider, "building")
-            || IsTaggedWithTagInParent(collider, "rock");
+            || IsTaggedWithTagInParent(collider, "rock")
+            || IsTaggedWithTagInParent(collider, "walls");
     }
 
     private bool IsTaggedWithTagInParent(
