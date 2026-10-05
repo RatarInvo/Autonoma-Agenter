@@ -374,16 +374,27 @@ public class DemoEnvironment : MonoBehaviour, IRoverEnvironment
 
         float height = SampleGround(x, z) + Random.Range(droneMinHeight, droneMaxHeight);
 
-        drone.SetPositionAndRotation(new Vector3(x, height, z),
-            Quaternion.Euler(0.0f, Random.Range(0.0f, 360.0f), 0.0f));
+        Vector3 spawnPosition = new Vector3(x, height, z);
+        Quaternion spawnRotation =
+            Quaternion.Euler(0.0f, Random.Range(0.0f, 360.0f), 0.0f);
 
-        Rigidbody body = drone.GetComponent<Rigidbody>();
+        DroneMove droneAgent = drone.GetComponent<DroneMove>();
 
-        if (body != null)
+        if (droneAgent != null)
         {
-            body.linearVelocity = Vector3.zero;
+            droneAgent.ResetToSpawn(spawnPosition, spawnRotation);
+        }
+        else
+        {
+            drone.SetPositionAndRotation(spawnPosition, spawnRotation);
 
-            body.angularVelocity = Vector3.zero;
+            Rigidbody body = drone.GetComponent<Rigidbody>();
+
+            if (body != null)
+            {
+                body.linearVelocity = Vector3.zero;
+                body.angularVelocity = Vector3.zero;
+            }
         }
     }
 }

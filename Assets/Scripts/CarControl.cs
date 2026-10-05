@@ -370,6 +370,7 @@ public class CarControl : Agent
 
         // held inside the meeting point long enough to count as parked.
         parked = true;
+        Debug.Log("Parked!");
 
         AddReward(arrivalReward
             + centeringReward * Mathf.Clamp01(1.0f - distanceToFinish / arrivalRadius));

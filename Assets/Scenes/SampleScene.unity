@@ -1009,12 +1009,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.104528464, y: 0, z: 0, w: 0.9945219}
-  m_LocalPosition: {x: -0.27, y: 8.2, z: -13.54}
+  m_LocalRotation: {x: 0.104528464, y: -0, z: -0, w: 0.9945219}
+  m_LocalPosition: {x: 448.83002, y: 8.099999, z: 262.36}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1935619482}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 20, y: 0, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
@@ -4418,7 +4418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ae2fb12b4c992f4998a6ca9947634a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  camera: {fileID: 0}
+  camera: {fileID: 330585546}
   offset: {x: 0, y: 2, z: -9}
   followYRotation: 0
 --- !u!114 &1828957264
@@ -4443,6 +4443,7 @@ MonoBehaviour:
   tiltSpeed: 5
   verticalDamping: 5
   horizontalDamping: 1
+  hoverHeightGain: 8
   rayLength: 300
   rayMask:
     serializedVersion: 2
@@ -4450,16 +4451,18 @@ MonoBehaviour:
   finishReward: 1
   progressRewardScale: 0.4
   timePenalty: -0.001
-  truck: {fileID: 0}
+  truck: {fileID: 1935619486}
   coordinateTruckEpisode: 1
-  waitingHeight: 20
-  landingHeight: 1.5
+  waitingHeight: 10
+  landingHeight: 0.25
   landingHorizontalGain: 3
   landingVerticalGain: 4
   landingSpeed: 1
   landingRadius: 1.5
   landingHeightTolerance: 0.75
   landingReward: 5
+  finishProximityRadius: 10
+  powerOffHeightAbovePad: 0.5
   obstacleRayLength: 300
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
@@ -4985,10 +4988,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 1076196169278958764, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
-      insertIndex: 4
-      addedObject: {fileID: 330585546}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
 --- !u!1 &1955581004
@@ -5260,7 +5260,7 @@ MonoBehaviour:
   obstacleSpacing: 26
   meetingPointRadius: 14
   roverRadius: 8
-  restartAfterArrival: 1
+  restartAfterArrival: 0
   holdSecondsAfterArrival: 10
   meetingPointYOffset: 46.3
   droneMinHeight: 30
@@ -5706,6 +5706,7 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 330585546}
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 1221697335}

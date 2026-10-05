@@ -13,6 +13,7 @@ public class DroneMove : Agent
     [SerializeField] private float tiltSpeed = 5f;
     [SerializeField] private float verticalDamping = 5f;
     [SerializeField] private float horizontalDamping = 1f;
+    [SerializeField] private float hoverHeightGain = 8f;
 
     [Header("Finish Line")]
     [SerializeField] private float rayLength = 300f;
@@ -24,14 +25,16 @@ public class DroneMove : Agent
     [Header("Truck Landing")]
     [SerializeField] private CarControl truck;
     [SerializeField] private bool coordinateTruckEpisode = true;
-    [SerializeField] private float waitingHeight = 20f;
-    [SerializeField] private float landingHeight = 1.5f;
+    [SerializeField] private float waitingHeight = 10f;
+    [SerializeField] private float landingHeight = 0.25f;
     [SerializeField] private float landingHorizontalGain = 3f;
     [SerializeField] private float landingVerticalGain = 4f;
     [SerializeField] private float landingSpeed = 1f;
     [SerializeField] private float landingRadius = 1.5f;
     [SerializeField] private float landingHeightTolerance = 0.75f;
     [SerializeField] private float landingReward = 5f;
+    [SerializeField] private float finishProximityRadius = 10f;
+    [SerializeField] private float powerOffHeightAbovePad = 0.50f;
 
     [Header("Obstacle Sensors")]
     [SerializeField] private float obstacleRayLength = 300f;
@@ -52,8 +55,10 @@ public class DroneMove : Agent
     private Vector2 movementInput;
 
     private bool episodeEnding;
+    private bool dronePowered = true;
 
     private float previousFinishDistance;
+    private float hoverHeight;
 
     private TrainingArea area;
 
@@ -76,8 +81,6 @@ public class DroneMove : Agent
         targetRotation = startingRotation;
         area = GetComponentInParent<TrainingArea>();
         FindTruck();
-
-        MaxStep = 4000;
     }
 
     public override void Initialize()
@@ -95,6 +98,12 @@ public class DroneMove : Agent
     public override void OnEpisodeBegin()
     {
         episodeEnding = false;
+        dronePowered = true;
+
+        if (rb != null)
+        {
+            rb.isKinematic = false;
+        }
 
         ResetState();
 
@@ -124,10 +133,13 @@ public class DroneMove : Agent
 
     public void ResetToSpawn(Vector3 spawnPosition, Quaternion spawnRotation)
     {
+        dronePowered = true;
         transform.SetPositionAndRotation(spawnPosition, spawnRotation);
+        hoverHeight = spawnPosition.y;
 
         if (rb != null)
         {
+            rb.isKinematic = false;
             rb.position = spawnPosition;
             rb.rotation = spawnRotation;
         }
@@ -464,6 +476,11 @@ public class DroneMove : Agent
 
     private void FindTruck()
     {
+        if (truck == null && area != null && area.rover != null)
+        {
+            truck = area.rover;
+        }
+
         if (truck == null && area != null)
         {
             truck = area.GetComponentInChildren<CarControl>(true);
@@ -477,6 +494,19 @@ public class DroneMove : Agent
 
     private void UpdateLandingPhase()
     {
+        if (truck == null)
+        {
+            FindTruck();
+        }
+
+        if (landingPhase == LandingPhase.Approach
+            && finishCenter != null
+            && HorizontalDistanceTo(finishCenter.position)
+                <= finishProximityRadius)
+        {
+            BeginWaitingForTruck(finishCenter);
+        }
+
         if (landingPhase == LandingPhase.WaitingForTruck
             && truck != null
             && truck.IsParked
@@ -493,22 +523,43 @@ public class DroneMove : Agent
         }
 
         Vector3 landingPosition = truck.LandingPad.position
-            + Vector3.up * landingHeight;
+            + Vector3.up * powerOffHeightAbovePad;
 
         Vector3 horizontalError = landingPosition - transform.position;
         horizontalError.y = 0f;
 
-        bool settled = horizontalError.magnitude <= landingRadius
-            && Mathf.Abs(transform.position.y - landingPosition.y)
-                <= landingHeightTolerance
-            && rb.linearVelocity.magnitude <= landingSpeed;
+        bool readyToPowerOff = horizontalError.magnitude <= landingRadius
+            && transform.position.y <= landingPosition.y + 0.05f;
 
-        if (settled)
+        if (readyToPowerOff && !episodeEnding)
         {
             episodeEnding = true;
             AddReward(landingReward);
-            EndEpisode();
+            PowerOffDrone();
+            Debug.Log("Drone has landed successfully!");
         }
+    }
+
+    private void PowerOffDrone()
+    {
+        dronePowered = false;
+        verticalInput = 0f;
+        movementInput = Vector2.zero;
+        rb.linearVelocity = new Vector3(
+            0f,
+            Mathf.Min(rb.linearVelocity.y, 0f),
+            0f
+        );
+        rb.angularVelocity = Vector3.zero;
+        rb.isKinematic = false;
+        rb.useGravity = true;
+    }
+
+    private float HorizontalDistanceTo(Vector3 position)
+    {
+        Vector3 offset = position - transform.position;
+        offset.y = 0f;
+        return offset.magnitude;
     }
 
     private void ApplyLandingControl()
@@ -523,7 +574,8 @@ public class DroneMove : Agent
             ? finishCenter != null
                 ? finishCenter.position + Vector3.up * waitingHeight
                 : transform.position
-            : truck.LandingPad.position + Vector3.up * landingHeight;
+            : truck.LandingPad.position
+                + Vector3.up * powerOffHeightAbovePad;
 
         Vector3 horizontalError = targetPosition - transform.position;
         horizontalError.y = 0f;
@@ -662,12 +714,17 @@ public class DroneMove : Agent
 
     private void FixedUpdate()
     {
-        if (rb == null)
+        if (rb == null || !dronePowered)
         {
             return;
         }
 
         UpdateLandingPhase();
+
+        if (!dronePowered)
+        {
+            return;
+        }
 
         if (landingPhase != LandingPhase.Approach)
         {
@@ -683,11 +740,19 @@ public class DroneMove : Agent
 
     private void Update()
     {
-        AnimatePropellers();
+        if (dronePowered)
+        {
+            AnimatePropellers();
+        }
     }
 
     private void Hover(float vertical)
     {
+        if (rb.isKinematic)
+        {
+            return;
+        }
+
         float gravity = Physics.gravity.magnitude;
 
         float angle =
@@ -711,6 +776,13 @@ public class DroneMove : Agent
 
         if (Mathf.Approximately(vertical, 0f))
         {
+            float heightError = hoverHeight - rb.position.y;
+
+            rb.AddForce(
+                Vector3.up * heightError * hoverHeightGain,
+                ForceMode.Force
+            );
+
             float dampedVerticalVelocity =
                 Mathf.MoveTowards(
                     rb.linearVelocity.y,
