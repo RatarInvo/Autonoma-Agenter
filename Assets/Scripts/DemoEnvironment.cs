@@ -24,8 +24,8 @@ public class DemoEnvironment : MonoBehaviour, IRoverEnvironment
     public int placementAttempts = 60;
 
     [Header("Obstacles")]
-    public int minObstacles = 4;
-    public int maxObstacles = 8;
+    public int minObstacles = 5;
+    public int maxObstacles = 50;
     public float obstacleRadius = 20.0f;
     public float corridorHalfWidth = 22.0f;
     public float corridorPadding = 25.0f;

@@ -13,7 +13,7 @@ public class DroneMove : Agent
     [SerializeField] private float tiltSpeed = 5f;
     [SerializeField] private float verticalDamping = 5f;
     [SerializeField] private float horizontalDamping = 1f;
-    [SerializeField] private float hoverHeightGain = 8f;
+    [SerializeField] private bool preventUncontrolledDescent;
 
     [Header("Finish Line")]
     [SerializeField] private float rayLength = 300f;
@@ -34,7 +34,7 @@ public class DroneMove : Agent
     [SerializeField] private float landingHeightTolerance = 0.75f;
     [SerializeField] private float landingReward = 5f;
     [SerializeField] private float finishProximityRadius = 10f;
-    [SerializeField] private float powerOffHeightAbovePad = 0.50f;
+    [SerializeField] private float powerOffHeightAbovePad = 1f;
 
     [Header("Obstacle Sensors")]
     [SerializeField] private float obstacleRayLength = 300f;
@@ -58,8 +58,6 @@ public class DroneMove : Agent
     private bool dronePowered = true;
 
     private float previousFinishDistance;
-    private float hoverHeight;
-
     private TrainingArea area;
 
     private Transform finishCenter;
@@ -135,7 +133,6 @@ public class DroneMove : Agent
     {
         dronePowered = true;
         transform.SetPositionAndRotation(spawnPosition, spawnRotation);
-        hoverHeight = spawnPosition.y;
 
         if (rb != null)
         {
@@ -753,6 +750,13 @@ public class DroneMove : Agent
             return;
         }
 
+        if (preventUncontrolledDescent
+            && landingPhase == LandingPhase.Approach
+            && vertical < 0f)
+        {
+            vertical = 0f;
+        }
+
         float gravity = Physics.gravity.magnitude;
 
         float angle =
@@ -774,15 +778,9 @@ public class DroneMove : Agent
             ForceMode.Force
         );
 
+        
         if (Mathf.Approximately(vertical, 0f))
         {
-            float heightError = hoverHeight - rb.position.y;
-
-            rb.AddForce(
-                Vector3.up * heightError * hoverHeightGain,
-                ForceMode.Force
-            );
-
             float dampedVerticalVelocity =
                 Mathf.MoveTowards(
                     rb.linearVelocity.y,

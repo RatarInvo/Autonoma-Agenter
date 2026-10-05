@@ -636,7 +636,7 @@ GameObject:
   - component: {fileID: 234666868}
   m_Layer: 0
   m_Name: Wall_East
-  m_TagString: walls
+  m_TagString: building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -1087,7 +1087,7 @@ GameObject:
   - component: {fileID: 348617555}
   m_Layer: 0
   m_Name: Wall_South
-  m_TagString: walls
+  m_TagString: building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -1815,7 +1815,7 @@ GameObject:
   - component: {fileID: 512201469}
   m_Layer: 0
   m_Name: Ceiling
-  m_TagString: walls
+  m_TagString: building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -2501,7 +2501,7 @@ GameObject:
   - component: {fileID: 775462411}
   m_Layer: 0
   m_Name: Wall_West
-  m_TagString: walls
+  m_TagString: building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -2955,7 +2955,7 @@ GameObject:
   - component: {fileID: 922039162}
   m_Layer: 0
   m_Name: Wall_North
-  m_TagString: walls
+  m_TagString: building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -3790,7 +3790,7 @@ GameObject:
   - component: {fileID: 1434028912}
   m_Layer: 0
   m_Name: MapBounds
-  m_TagString: Untagged
+  m_TagString: building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4443,7 +4443,7 @@ MonoBehaviour:
   tiltSpeed: 5
   verticalDamping: 5
   horizontalDamping: 1
-  hoverHeightGain: 8
+  preventUncontrolledDescent: 1
   rayLength: 300
   rayMask:
     serializedVersion: 2
@@ -4453,8 +4453,8 @@ MonoBehaviour:
   timePenalty: -0.001
   truck: {fileID: 1935619486}
   coordinateTruckEpisode: 1
-  waitingHeight: 10
-  landingHeight: 0.25
+  waitingHeight: 20
+  landingHeight: 1.5
   landingHorizontalGain: 3
   landingVerticalGain: 4
   landingSpeed: 1
@@ -4462,7 +4462,7 @@ MonoBehaviour:
   landingHeightTolerance: 0.75
   landingReward: 5
   finishProximityRadius: 10
-  powerOffHeightAbovePad: 0.5
+  powerOffHeightAbovePad: 1
   obstacleRayLength: 300
   obstacleSphereRadius: 0.8
   obstacleVerticalAngle: 30
@@ -5248,11 +5248,11 @@ MonoBehaviour:
   hillFrequency: 0.012
   margin: 70
   minSeparation: 45
-  maxSeparation: 125
+  maxSeparation: 500
   roverSpawnHeight: 1
   placementAttempts: 60
-  minObstacles: 4
-  maxObstacles: 8
+  minObstacles: 5
+  maxObstacles: 50
   obstacleRadius: 20
   corridorHalfWidth: 22
   corridorPadding: 25
