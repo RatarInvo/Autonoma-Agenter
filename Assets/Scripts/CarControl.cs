@@ -6,7 +6,7 @@ using Unity.MLAgents.Sensors;
 public class CarControl : Agent
 {
     [Header("Car Settings")]
-    public float enginePower = 2000.0f;
+    public float enginePower = 1200.0f;
     public float wallPenalty = -1.0f;
     public float obstaclePenalty = -1.0f;
     public float turnSpeed = 25.0f;

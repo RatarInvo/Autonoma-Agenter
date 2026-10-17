@@ -4852,7 +4852,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 406654488547587609, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
       propertyPath: enginePower
-      value: 2000
+      value: 1200
       objectReference: {fileID: 0}
     - target: {fileID: 406654488547587609, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
       propertyPath: finishPoint
@@ -4875,8 +4875,12 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 406654488547587609, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
+      propertyPath: obstaclePenalty
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 406654488547587609, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
       propertyPath: distanceNormalizer
-      value: 212.12999
+      value: 565.68
       objectReference: {fileID: 0}
     - target: {fileID: 406654488547587609, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
       propertyPath: progressRewardScale
@@ -4925,7 +4929,7 @@ PrefabInstance:
     - target: {fileID: 4942132855396177709, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 9a5390d7b6c88d14898ea7f9f38b638a, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 4942132855396177709, guid: e2c4287a936a99c4d9988378e62d0060, type: 3}
       propertyPath: m_BehaviorName
       value: TruckBrain

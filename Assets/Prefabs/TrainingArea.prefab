@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 583066600409928502}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -75, y: 15, z: 0}
-  m_LocalScale: {x: 2, y: 30, z: 152}
+  m_LocalPosition: {x: -200, y: 15, z: 0}
+  m_LocalScale: {x: 2, y: 30, z: 402}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2709490687069072627}
@@ -175,8 +175,8 @@ Transform:
   m_GameObject: {fileID: 2739153758023977032}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 15, z: 75}
-  m_LocalScale: {x: 152, y: 30, z: 2}
+  m_LocalPosition: {x: 0, y: 15, z: 200}
+  m_LocalScale: {x: 402, y: 30, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2709490687069072627}
@@ -377,8 +377,8 @@ Transform:
   m_GameObject: {fileID: 3436751721801954125}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 75, y: 15, z: 0}
-  m_LocalScale: {x: 2, y: 30, z: 152}
+  m_LocalPosition: {x: 200, y: 15, z: 0}
+  m_LocalScale: {x: 2, y: 30, z: 402}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2709490687069072627}
@@ -602,8 +602,8 @@ Transform:
   m_GameObject: {fileID: 4532009973849329043}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 15, z: -75}
-  m_LocalScale: {x: 152, y: 30, z: 2}
+  m_LocalPosition: {x: 0, y: 15, z: -200}
+  m_LocalScale: {x: 402, y: 30, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2709490687069072627}
@@ -767,13 +767,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrainingArea
   level: 5
-  areaSize: 150
-  gridResolution: 40
+  areaSize: 400
+  gridResolution: 80
   hillAmplitude: 24
   hillFrequency: 0.012
   fixedRoverLocal: {x: 0, y: 0, z: -35}
   fixedMeetingPointLocal: {x: 0, y: 0, z: 35}
-  spawnMargin: 15
+  spawnMargin: 20
   minSeparation: 45
   roverSpawnHeight: 1
   placementAttempts: 40
@@ -785,8 +785,8 @@ MonoBehaviour:
   - {fileID: 2735520216587716315, guid: 8b8a01fba28a67249a0a24db0a16182e, type: 3}
   - {fileID: 3596782502731829571, guid: 8b7b640f02d82c74292b9b49c666639f, type: 3}
   fixedObstacleCount: 6
-  minObstacles: 4
-  maxObstacles: 8
+  minObstacles: 5
+  maxObstacles: 50
   obstacleRadius: 20
   meetingPointRadius: 14
   roverRadius: 8
@@ -862,9 +862,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 6756334437409037770}
     m_Modifications:
     - target: {fileID: 257088671360632127, guid: 9940839987fd3034d8d6eb7317fa1836, type: 3}
+      propertyPath: MaxStep
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 257088671360632127, guid: 9940839987fd3034d8d6eb7317fa1836, type: 3}
       propertyPath: finishPoint
       value: 
       objectReference: {fileID: 3818688417505300891}
+    - target: {fileID: 257088671360632127, guid: 9940839987fd3034d8d6eb7317fa1836, type: 3}
+      propertyPath: timePenalty
+      value: -0.00033333333
+      objectReference: {fileID: 0}
     - target: {fileID: 6713504774485330899, guid: 9940839987fd3034d8d6eb7317fa1836, type: 3}
       propertyPath: m_Name
       value: RoverAgent
